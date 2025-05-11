@@ -1,0 +1,14 @@
+{
+  "name": "zzz-template-test",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "zzz-template": "file:../"
+  },
+  "devDependencies": {
+    "jsdom": "^27.0.1"
+  },
+  "scripts": {
+    "test": "node --test"
+  }
+}

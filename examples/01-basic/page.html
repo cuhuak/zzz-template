@@ -1,0 +1,17 @@
+<script id="template" type="plain/text">
+  <p>
+    Hello ${data.name}
+  </p>
+</script>
+
+<script type="module">
+  import { ZzzBrowser } from '/zzz-template/index.js'
+
+  const zzz = new ZzzBrowser()
+
+  const result = zzz.render('template', { name: 'world' })
+
+  console.log(result)
+
+  document.body.innerHTML = result
+</script>

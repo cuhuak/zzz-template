@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<script id="page" type="plain/text">
+  ${SET('pageTitle', 'My Page')}
+  <p>
+  Hello ${data.name}!
+  </p>
+  <p>I have got pets:</p>
+  <ul>
+  ${MAPI(data.pets, 'pet')}
+  </ul>
+  <br>
+  ${IFI(data.showSay, 'pets-say', data)}
+  ${LAYOUT('layout', {user: data.me})}
+</script>
+
+<script id="pet" type="plain/text">
+  <li>${data.name}</li>
+</script>
+
+<script id="pets-say" type="plain/text">
+  My pets say:
+  <ul>
+  ${data.pets.map(pet => INCLUDE('pet-say', pet)).join('')}
+  </ul>
+</script>
+
+<script id="pet-say" type="plain/text">
+  <li>My ${data.name} says ${data.say}</li>
+</script>
+
+<script id="layout" type="plain/text">
+  <section>
+  <h1>${local.pageTitle}</h1>
+  ${data.content}
+  ${INCLUDE('footer', data)}
+  </section>
+</script>
+
+<script id="footer" type="plain/text">
+  <footer>
+    Bye!
+    ${data.user.name}
+  </footer>
+</script>
+<script type="module">
+  import { ZzzBrowser, useLayout, useContentTrim, useLocal, useIfMap } from '/zzz-template/index.js'
+
+  const data = {
+    name: 'world',
+    pets: [{ name: 'cat', say: 'meow' }, { name: 'dog', say: 'woof' }],
+    showSay: true,
+    me: { name: 'Bob' }
+  }
+  const renderer = new ZzzBrowser()
+  useContentTrim(renderer)
+  useLayout(renderer)
+  useLocal(renderer)
+  useIfMap(renderer)
+
+  const result = renderer.render('page', data)
+  document.querySelector('#test1').innerHTML = result
+  document.querySelector('#result1').textContent = result
+</script>
+<body>
+<div id="test1"></div>
+<br>
+OUTPUT:
+<pre id="result1"></pre>
+<hr>
+<div id="test2"></div>
+<pre id="result2"></pre>
+</body>
+</html>

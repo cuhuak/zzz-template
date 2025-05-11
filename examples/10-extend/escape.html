@@ -1,0 +1,29 @@
+<script type="module">
+  import { ZzzBrowser, useFn } from '/zzz-template/index.js'
+
+  const zzz = new ZzzBrowser()
+
+  function escapeHtml (unsafe) {
+    return unsafe
+      .replaceAll("&", "&amp;")
+      .replaceAll("<", "&lt;")
+      .replaceAll(">", "&gt;")
+      .replaceAll('"', "&quot;")
+      .replaceAll("'", "&#039;")
+  }
+
+  useFn(zzz, escapeHtml, 'ESCAPE')
+  const evilString = 'John<img src="" onerror=alert("Boo!")>'
+
+  const result = zzz.render('template', { name: evilString })
+
+  console.log(result)
+  document.body.innerHTML = result
+</script>
+
+<script id="template" type="plain/text">
+  <p>
+    Hello ${ESCAPE(data.name)}!
+  </p>
+</script>
+

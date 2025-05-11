@@ -1,0 +1,10 @@
+${SET('subject', 'Subject from template')}
+${SET('to', data.user.name)}
+${LAYOUT('./layout.html', {user: data.user})}
+
+${INCLUDE('./_greet.html', data)}
+
+Happy Birthday!
+Wishing you joy, love, and unforgettable moments on your special day.
+
+${SETA('emotes', '❤️', '🎉')}

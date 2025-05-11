@@ -1,0 +1,24 @@
+<script type="module">
+  import { ZzzBrowser, useIfMap } from '/zzz-template/index.js'
+
+  const zzz = new ZzzBrowser()
+  useIfMap(zzz) // 👈 enables "if/map" feature
+
+  const result = zzz.render('template', { name: 'world', n: 42 })
+
+  document.body.innerHTML = result
+</script>
+
+<script id="template" type="plain/text">
+  <p>
+    Hello ${data.name}!
+  </p>
+
+  ${IFI(data.n % 2 == 0, 'partial', {n: data.n})}
+</script>
+
+<script id="partial" type="plain/text">
+  <p>
+    ${data.n} is even!
+  </p>
+</script>

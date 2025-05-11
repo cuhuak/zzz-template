@@ -1,0 +1,27 @@
+<script type="module">
+  import { ZzzBrowser, useIfMap } from '/zzz-template/index.js'
+
+  const zzz = new ZzzBrowser()
+  useIfMap(zzz) // 👈 enables "if/map" feature
+
+  const result = zzz.render('template', { name: 'world', n: 42 })
+
+  document.body.innerHTML = result
+</script>
+
+<script id="template" type="plain/text">
+  <p>
+    Hello ${data.name}!
+  </p>
+
+  ${IF(data.n === 42, 'Hello ${data.n}!', {n: data.n})}
+
+  <hr>
+
+  ${IF(data.n === 42, `
+    Hello ${data.n}! <br>
+    ${IF(data.n % 2 === 0, `
+      doubled ${data.n} is \${data.number}.
+    `, {number: data.n * 2})}
+  `)}
+</script>

@@ -1,0 +1,34 @@
+<script type="module">
+  import { ZzzBrowser, useIfMap } from '/zzz-template/index.js'
+
+  const zzz = new ZzzBrowser()
+  useIfMap(zzz) // 👈 enables "if/map" feature
+
+  const pets = [{ name: 'cat', say: 'meow' }, { name: 'dog', say: 'woof' }]
+  const result = zzz.render('template', { name: 'John Doe', pets })
+
+  document.body.innerHTML = result
+</script>
+
+<script id="template" type="plain/text">
+  // [1] using javascript .map
+  <ul>
+    ${data.pets.map(x => TEMPLATE('<li>${data.name}</li>', x)).join('')}
+  </ul>
+  // [2] using MAP and string
+  <ul>
+    ${MAP(data.pets, '<li>${data.name}</li>')}
+  </ul>
+  // [2'] using MAP and string template (note that dollar-sign ($) is escaped)
+  <ul>
+    ${MAP(data.pets, `<li>\${data.name}</li>`)}
+  </ul>
+  // [3] using MAPI (map include) to include template for each element
+  <ul>
+    ${MAPI(data.pets, 'pet')}
+  </ul>
+</script>
+
+<script id="pet" type="plain/text">
+  <li>${data.name} (says: ${data.say})</li>
+</script>

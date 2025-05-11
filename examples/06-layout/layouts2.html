@@ -1,0 +1,45 @@
+<script id="template" type="plain/text">
+  ${LAYOUT('layout')}
+  ${SET('title', 'My page')}
+  <p>
+    Hello ${data.name}
+  </p>
+</script>
+
+<script id="layout" type="plain/text">
+  ${LAYOUT('global')}
+  <div style="background: #eee; padding: 1em; margin: 1em 0;">
+    <div>layout begin</div>
+    <section class="layout">
+    ${data.content}
+    </section>
+    <div>layout end</div>
+  </div>
+</script>
+
+<script id="global" type="plain/text">
+  <div style="background: #ffb; padding: 1em;">
+    <nav>
+      <a href="#">link1</a>
+      <a href="#">link2</a>
+      <a href="#">link3</a>
+    </nav>
+    <h1>${local.title}</h1>
+    ${data.content}
+    <footer>Footer</footer>
+  </div>
+</script>
+
+<script type="module">
+  import { ZzzBrowser, useLayout, useLocal } from '/zzz-template/index.js'
+
+  const zzz = new ZzzBrowser()
+  useLayout(zzz) // 👈 enables layout feature
+  useLocal(zzz) // 👈 enables local vars feature
+
+  const result = zzz.render('template', { name: 'world' })
+
+  console.log(result)
+
+  document.body.innerHTML = result
+</script>

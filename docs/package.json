@@ -1,0 +1,8 @@
+{
+  "name": "zzz-template-docs",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "zzz-template": "file://.."
+  }
+}

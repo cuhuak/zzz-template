@@ -1,0 +1,24 @@
+<script type="module">
+  import { ZzzBrowser, useLayout } from '/zzz-template/index.js'
+
+  const zzz = new ZzzBrowser()
+  useLayout(zzz) // 👈 enables layout feature
+
+  const result = zzz.render('template', { name: 'world' })
+
+  document.body.innerHTML = result
+</script>
+
+<script id="template" type="plain/text">
+  ${LAYOUT('layout', {name: 'universe'})}
+  <p>
+    Hello ${data.name}!
+  </p>
+</script>
+
+<script id="layout" type="plain/text">
+  Hey ${data.name}!
+  <div>
+    ${data.content}
+  </div>
+</script>

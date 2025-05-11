@@ -1,0 +1,24 @@
+<script type="module">
+  import { ZzzBrowser, useInclude } from '/zzz-template/index.js'
+
+  const zzz = new ZzzBrowser()
+  useInclude(zzz) // 👈 enables include feature
+
+  const result = zzz.render('template', { name: 'world' })
+
+  document.body.innerHTML = result
+</script>
+
+<script id="template" type="plain/text">
+  <p>
+    Hello ${data.name}!
+  </p>
+
+  ${INCLUDE('partial', {name: 'universe'})}
+</script>
+
+<script id="partial" type="plain/text">
+  <p>
+    Hey ${data.name}!
+  </p>
+</script>

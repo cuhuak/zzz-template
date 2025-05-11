@@ -1,0 +1,22 @@
+{
+  "name": "zzz-template-bench",
+  "main": "bench.js",
+  "scripts": {
+    "bench": "node bench.js"
+  },
+  "author": {
+    "name": "Evgeny Sinitsyn",
+    "email": "cuhuak@gmail.com"
+  },
+  "license": "MIT",
+  "description": "Benchmark for zzz-template",
+  "dependencies": {
+    "benchmark": "^2.1.4",
+    "dot": "^1.1.2",
+    "edge.js": "^6.2.1",
+    "ejs": "^3.1.10",
+    "template-literal": "^1.0.4",
+    "zup": "0.0.1",
+    "zzz-template": "file://.."
+  }
+}
