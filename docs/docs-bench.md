@@ -1,6 +1,6 @@
 ## Fast
 
-Fastest JS engine ever :) That is true, see the benchmark results (ran on author's intel i7):
+Fastest JS engine ever :) That is true, see the benchmark results (ran on old author's intel i7):
 
 ```
 --------- Benchmark Render ---------
@@ -14,15 +14,14 @@ edge render x 8,037 ops/sec ±1.80% (90 runs sampled)
 Fastest is vanilla render, zzz render
 ```
 
-Try to run benchmarks yourself
+Try to run benchmarks
 ```
-# make monorepo links
-npm i
-
-# go to bench and install deps 
+# go to bench 
 cd bench
+
+# install deps
 npm i
 
-# go
+# run
 npm run bench
 ```

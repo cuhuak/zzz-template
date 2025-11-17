@@ -3,12 +3,10 @@
   "version": "0.0.1",
   "type": "module",
   "description": "Simplest, fastest, hackable, and still powerful Javascript template engine. No deps. ~50 loc",
-  "main": "index.js",
   "author": {
     "name": "Evgeny Sinitsyn",
     "email": "cuhuak@gmail.com"
   },
-  "license": "MIT",
   "keywords": [
     "template",
     "literals",
@@ -22,6 +20,7 @@
     "template engine",
     "fast"
   ],
+  "license": "MIT",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/cuhuak/zzz-template.git"
@@ -30,6 +29,7 @@
     "url": "https://github.com/cuhuak/zzz-template/issues"
   },
   "homepage": "https://github.com/cuhuak/zzz-template#readme",
+  "main": "index.js",
   "files": [
     "index.js",
     "fs.js",
@@ -38,12 +38,6 @@
   ],
   "engines": {
     "node": ">=18.0.0"
-  },
-  "scripts": {
-    "test": "node --test",
-    "serve": "npx serve .",
-    "build:docs": "node docs/build.js",
-    "bench": "node bench/bench.js"
   },
   "exports": {
     ".": {

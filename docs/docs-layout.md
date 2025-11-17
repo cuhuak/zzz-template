@@ -1,7 +1,7 @@
 
 ## Layouts
 * `useLayout(zzz)` to enable layouts feature
-* `${LAYOUT('layout', {name: 'universe'})}` to set layout in `template` (`${LAYOUT(...)}` is the same)
+* `${LAYOUT('layout', {name: 'universe'})}` to set layout in `template`
 * `${data.content}` to echo content (result of `template`) in layout `layout`
 
 $${EXAMPLE('Example Layout', 'examples/06-layout/layouts.html')}

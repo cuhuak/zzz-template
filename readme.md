@@ -8,7 +8,7 @@
 - fast, ultra fast, mega fast, m-m-m-monster fast
 - no deps
 - tiny, ~50 lines of code, ~500 bytes min gzipped
-- hackable, lol? you will see
+- hackable! lol? you will see
 - works on server and browser
 
 ## Get started
@@ -105,7 +105,7 @@ console.log(result)
 
 ## Layouts
 * `useLayout(zzz)` to enable layouts feature
-* `${LAYOUT('layout', {name: 'universe'})}` to set layout in `template` (`${LAYOUT(...)}` is the same)
+* `${LAYOUT('layout', {name: 'universe'})}` to set layout in `template`
 * `${data.content}` to echo content (result of `template`) in layout `layout`
 
 ### Example Layout (see [examples/06-layout](examples/06-layout))
@@ -378,7 +378,7 @@ console.log(result); // > "Hello Tom"
 
 ## Fast
 
-Fastest JS engine ever :) That is true, see the benchmark results (ran on author's intel i7):
+Fastest JS engine ever :) That is true, see the benchmark results (ran on old author's intel i7):
 
 ```
 --------- Benchmark Render ---------
@@ -392,16 +392,15 @@ edge render x 8,037 ops/sec ±1.80% (90 runs sampled)
 Fastest is vanilla render, zzz render
 ```
 
-Try to run benchmarks yourself
+Try to run benchmarks
 ```
-# make monorepo links
-npm i
-
-# go to bench and install deps 
+# go to bench 
 cd bench
+
+# install deps
 npm i
 
-# go
+# run
 npm run bench
 ```
 
@@ -417,4 +416,4 @@ MIT
 
 
 ---
-Docs revision: 2025-10-06T08:28:31.441Z
+Docs revision: 2025-11-17T10:16:24.682Z
