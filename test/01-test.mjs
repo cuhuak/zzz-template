@@ -84,7 +84,7 @@ describe('render, default read', () => {
 })
 
 describe('render, custom read fs (test/dir)', () => {
-  const renderer = new ZzzFs({dir: `${import.meta.dirname}/dir`})
+  const renderer = new ZzzFs({dir: `${import.meta.dirname}/templates`})
   useLocal(renderer)
   useContentTrim(renderer)
   useLayout(renderer)
