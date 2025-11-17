@@ -35,4 +35,4 @@ export class ZzzDocs extends ZzzBase {
 const zzz = new ZzzDocs({ dir: import.meta.dirname })
 const result = zzz.render('docs.md', { date: new Date().toISOString() })
 
-writeFileSync(join(import.meta.dirname, '../readme.md'), result)
+writeFileSync(join(import.meta.dirname, '../README.md'), result)
