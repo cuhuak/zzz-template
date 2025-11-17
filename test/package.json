@@ -6,7 +6,7 @@
     "zzz-template": "file:../"
   },
   "devDependencies": {
-    "jsdom": "^27.0.1"
+    "jsdom": "^27.2.0"
   },
   "scripts": {
     "test": "node --test"
