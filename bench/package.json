@@ -1,5 +1,6 @@
 {
   "name": "zzz-template-bench",
+  "type": "module",
   "main": "bench.js",
   "scripts": {
     "bench": "node bench.js"

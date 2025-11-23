@@ -1,27 +1,39 @@
-;(async () => {
-  const n = 1e5
-  const fs = require('fs')
-  const Benchmark = require('benchmark')
+import fs from 'fs'
+import { fileURLToPath } from 'url'
+import { dirname } from 'node:path'
+import Benchmark from 'benchmark'
+import { ZzzBase } from 'zzz-template'
+import templateLiteral from 'template-literal'
+import zup from 'zup'
+import ejs from 'ejs'
+import dot from 'dot'
+import { Edge } from 'edge.js'
 
-  function readTemplate(f) {
-    return fs.readFileSync(`${__dirname}/${f}`, 'utf8')
-  }
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = dirname(__filename)
 
-  const wait = () =>
-    new Promise(resolve => {
-      setTimeout(resolve, 100)
-    })
+function readTemplate(f) {
+  return fs.readFileSync(`${__dirname}/${f}`, 'utf8')
+}
 
-  const zzz = new (require('zzz-template').ZzzBase)
+const wait = () =>
+  new Promise(resolve => {
+    setTimeout(resolve, 100)
+  })
+
+//const NUMBER_OF_TESTS = 1e5
+const NUMBER_OF_TESTS = 15
+
+async function run() {
+  const zzz = new ZzzBase()
   const compileZzz = zzz.compile.bind(zzz)
   const compileVanilla = function (tpl) { return new Function('data', `\`${tpl}\``) }
-  const compileTemplateLiteral = require('template-literal')
-  const compileZup = require('zup')
-  const compileEjs = require('ejs').compile
-  const compileDot = require('dot').template
-  const Edge = require('edge.js').Edge;
-  const edge = Edge.create();
-  edge.mount('./');
+  const compileTemplateLiteral = templateLiteral
+  const compileZup = zup
+  const compileEjs = ejs.compile
+  const compileDot = dot.template
+  const edge = Edge.create()
+  edge.mount('./')
 
   const tplZzz = readTemplate('./template-zzz.html')
   const tplVanilla = tplZzz
@@ -58,41 +70,41 @@
   console.log('--------- console.time Compile ---------')
   {
     console.time('vanilla compile')
-    for (let i = 0; i < n; ++i) compileVanilla(tplVanilla)
+    for (let i = 0; i < NUMBER_OF_TESTS; ++i) compileVanilla(tplVanilla)
     console.timeEnd('vanilla compile')
 
     console.time('zzz compile')
-    for (let i = 0; i < n; ++i) compileZzz(tplZzz)
+    for (let i = 0; i < NUMBER_OF_TESTS; ++i) compileZzz(tplZzz)
     console.timeEnd('zzz compile')
 
     await wait()
 
     console.time('literal compile')
-    for (let i = 0; i < n; ++i) compileTemplateLiteral(tplTemplateLiteral)
+    for (let i = 0; i < NUMBER_OF_TESTS; ++i) compileTemplateLiteral(tplTemplateLiteral)
     console.timeEnd('literal compile')
 
     await wait()
 
     console.time('zup compile')
-    for (let i = 0; i < n; ++i) compileZup(tplZup, optionsZup)
+    for (let i = 0; i < NUMBER_OF_TESTS; ++i) compileZup(tplZup, optionsZup)
     console.timeEnd('zup compile')
 
     await wait()
 
     console.time('ejs compile')
-    for (let i = 0; i < n; ++i) compileEjs(tplEjs, optionsEjs)
+    for (let i = 0; i < NUMBER_OF_TESTS; ++i) compileEjs(tplEjs, optionsEjs)
     console.timeEnd('ejs compile')
 
     await wait()
 
     console.time('doT compile')
-    for (let i = 0; i < n; ++i) compileDot(tplDot, optionsDot)
+    for (let i = 0; i < NUMBER_OF_TESTS; ++i) compileDot(tplDot, optionsDot)
     console.timeEnd('doT compile')
 
     await wait()
 
     console.time('edge compile')
-    for (let i = 0; i < n; ++i) edge.compiler.compileRaw(tplEdge)
+    for (let i = 0; i < NUMBER_OF_TESTS; ++i) edge.compiler.compileRaw(tplEdge)
     console.timeEnd('edge compile')
 
     await wait()
@@ -101,43 +113,43 @@
   console.log('--------- console.time Render ---------')
   {
     console.time('vanilla render')
-    for (let i = 0; i < n; ++i) compiledVanilla(data)
+    for (let i = 0; i < NUMBER_OF_TESTS; ++i) compiledVanilla(data)
     console.timeEnd('vanilla render')
 
     await wait()
 
     console.time('zzz render')
-    for (let i = 0; i < n; ++i) compiledZzz(data)
+    for (let i = 0; i < NUMBER_OF_TESTS; ++i) compiledZzz(data)
     console.timeEnd('zzz render')
 
     await wait()
 
     console.time('literal render')
-    for (let i = 0; i < n; ++i) compiledTemplateLiteral(data)
+    for (let i = 0; i < NUMBER_OF_TESTS; ++i) compiledTemplateLiteral(data)
     console.timeEnd('literal render')
 
     await wait()
 
     console.time('zup render')
-    for (let i = 0; i < n; ++i) compiledZup(data)
+    for (let i = 0; i < NUMBER_OF_TESTS; ++i) compiledZup(data)
     console.timeEnd('zup render')
 
     await wait()
 
     console.time('ejs render')
-    for (let i = 0; i < n; ++i) compiledEjs(data)
+    for (let i = 0; i < NUMBER_OF_TESTS; ++i) compiledEjs(data)
     console.timeEnd('ejs render')
 
     await wait()
 
     console.time('doT render')
-    for (let i = 0; i < n; ++i) compiledDot(data)
+    for (let i = 0; i < NUMBER_OF_TESTS; ++i) compiledDot(data)
     console.timeEnd('doT render')
 
     await wait()
 
     console.time('edge render')
-    for (let i = 0; i < n; ++i) compiledEdge(data)
+    for (let i = 0; i < NUMBER_OF_TESTS; ++i) compiledEdge(data)
     console.timeEnd('edge render')
 
     await wait()
@@ -217,4 +229,6 @@
       })
       .run()
   }
-})()
+}
+
+run().then(() => {})
