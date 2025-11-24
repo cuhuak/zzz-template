@@ -324,8 +324,8 @@ See example how layout can include each other: `examples/06-layout/layouts2.html
 ```
 
 ## Extend and hack
-ZzzTemplate already has a few built-in plugins. Plugin is just a function that monkey patch ZzzTemplate instance.
-For instance, you can inject your code into compile function. Here is 'trim' example:
+ZzzTemplate already has a few built-in plugins. A plugin is just a function that monkey-patches the ZzzTemplate instance.
+For instance, you can inject your code into the compile function. Here is a 'trim' example:
 
 ``` javascript
 import {ZzzBrowser, useContentTrim} from "zzz-template"
@@ -343,10 +343,10 @@ function useContentTrim(zzz) {
   zzz.e.push('content = content.trim();')
 }
 ```
-This function just pushes code-snippet to the end array that will be invoked after template content compiled. 
+This function pushes a code snippet to the end array that will be invoked after the template content is compiled. 
 
 
-Or you may want to introduce new var in your templates.
+Or you may want to introduce a new var in your templates.
 
 ``` javascript
 import {ZzzBrowser, useContentTrim} from "zzz-template"
@@ -397,7 +397,7 @@ console.log(result); // > "Hello Tom"
 
 ## Fast
 
-Fastest JS engine ever :) That is true, see the benchmark results (ran on old author's intel i7):
+Fastest JS engine ever :) That is true, see the benchmark results (ran on the author's old Intel i7):
 
 ```
 --------- Benchmark Render ---------
@@ -424,12 +424,12 @@ npm run bench
 ```
 
 ## Security
-Do not render templates (by filename) that comes from user input, and values in templates that comes from user input, it is danger.
+Do not render templates (by filename) that come from user input, or values in templates that come from user input—it is dangerous.
 And if you do, please make sure you:
-- provide a secure `zzz.read` function, that reads files from specified dir, and not `../../../secret.passwords`
-- escape all user inputs to prevent XSS attacks
+- provide a secure `zzz.read` function that reads files from a specified directory, not `../../../secret.passwords`
+- escape all user input to prevent XSS attacks
 
-## Licence
+## License
 MIT
 
 ## Related
@@ -441,4 +441,4 @@ Looking for JavaScript template engines? Here are some alternatives:
 - [doT](https://www.npmjs.com/package/dot) - Fast template engine
 
 ---
-Docs revision: 2025-11-23T20:04:26.847Z
+Docs revision: 2025-11-24T08:05:23.013Z

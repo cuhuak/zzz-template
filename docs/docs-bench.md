@@ -1,6 +1,6 @@
 ## Fast
 
-Fastest JS engine ever :) That is true, see the benchmark results (ran on old author's intel i7):
+Fastest JS engine ever :) That is true, see the benchmark results (ran on the author's old Intel i7):
 
 ```
 --------- Benchmark Render ---------

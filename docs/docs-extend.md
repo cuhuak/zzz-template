@@ -1,6 +1,6 @@
 ## Extend and hack
-ZzzTemplate already has a few built-in plugins. Plugin is just a function that monkey patch ZzzTemplate instance.
-For instance, you can inject your code into compile function. Here is 'trim' example:
+ZzzTemplate already has a few built-in plugins. A plugin is just a function that monkey-patches the ZzzTemplate instance.
+For instance, you can inject your code into the compile function. Here is a 'trim' example:
 
 ``` javascript
 import {ZzzBrowser, useContentTrim} from "zzz-template"
@@ -18,10 +18,10 @@ function useContentTrim(zzz) {
   zzz.e.push('content = content.trim();')
 }
 ```
-This function just pushes code-snippet to the end array that will be invoked after template content compiled. 
+This function pushes a code snippet to the end array that will be invoked after the template content is compiled. 
 
 
-Or you may want to introduce new var in your templates.
+Or you may want to introduce a new var in your templates.
 
 ``` javascript
 import {ZzzBrowser, useContentTrim} from "zzz-template"
