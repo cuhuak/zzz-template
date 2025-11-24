@@ -1,24 +1,33 @@
 {
   "name": "zzz-template",
-  "version": "0.0.1",
+  "version": "0.9.1",
   "type": "module",
-  "description": "Simplest, fastest, hackable, and still powerful Javascript template engine. No deps. ~50 loc",
+  "description": "Fastest JavaScript template engine using native template literals. Zero dependencies, ~500 bytes, works in Node.js and browser. EJS/Handlebars alternative.",
   "author": {
     "name": "Evgeny Sinitsyn",
     "email": "cuhuak@gmail.com"
   },
   "keywords": [
     "template",
-    "literals",
-    "strings",
-    "engine",
+    "template-engine",
+    "template-literal",
+    "template-literals",
+    "javascript-template",
+    "html-template",
     "render",
     "layout",
     "partial",
-    "template literals",
-    "template strings",
-    "template engine",
-    "fast"
+    "include",
+    "fast",
+    "lightweight",
+    "zero-dependency",
+    "browser",
+    "nodejs",
+    "isomorphic",
+    "ejs-alternative",
+    "handlebars-alternative",
+    "mustache-alternative",
+    "string-interpolation"
   ],
   "license": "MIT",
   "repository": {

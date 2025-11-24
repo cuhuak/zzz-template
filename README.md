@@ -1,20 +1,39 @@
-# zzz — simplest, hackable, fastest Javascript template engine
+# zzz-template
+
+> The fastest, simplest JavaScript template engine with zero dependencies
+
+[![npm version](https://img.shields.io/npm/v/zzz-template.svg)](https://www.npmjs.com/package/zzz-template)
+[![npm bundle size](https://img.shields.io/bundlephobia/minzip/zzz-template)](https://bundlephobia.com/package/zzz-template)
+[![license](https://img.shields.io/npm/l/zzz-template.svg)](https://github.com/cuhuak/zzz-template/blob/main/LICENSE)
+
+**zzz-template** is an ultra-lightweight JavaScript template engine that leverages native template literals for maximum performance. A fast, hackable alternative to EJS, Handlebars, and Mustache that works in both Node.js and browsers.
+
+## Why zzz-template?
+
+| Feature | zzz-template | EJS | Handlebars |
+|---------|-------------|-----|------------|
+| Size (min+gzip) | ~500 bytes | ~6KB | ~17KB |
+| Dependencies | 0 | 1 | 0 |
+| Performance | 24M ops/sec | 247K ops/sec | - |
+| Browser + Node.js | Yes | Yes | Yes |
+| Template Literals | Native | No | No |
 
 ## Features
-- echo: `${data.user.name}`
-- layouts: set layout in child template `${LAYOUT("layout.html")}`, echo content `${data.content}` in `layout.html`
-- include (partial) template: `${INCLUDE('partial.html', data)}`
-- local variables: `${SET('title', 'Hello world')}`, then use it in template (partial, layout): `${local.title}`
-- fast, ultra fast, mega fast, m-m-m-monster fast
-- no deps
-- tiny, ~50 lines of code, ~500 bytes min gzipped
-- hackable! lol? you will see
-- works on server and browser
 
-## Get started
+- **Echo variables**: `${data.user.name}`
+- **Layouts**: Set layout in child template `${LAYOUT("layout.html")}`, echo content `${data.content}` in `layout.html`
+- **Include (partial) templates**: `${INCLUDE('partial.html', data)}`
+- **Local variables**: `${SET('title', 'Hello world')}`, then use it in template: `${local.title}`
+- **Blazing fast**: Matches vanilla JavaScript performance (24M ops/sec)
+- **Zero dependencies**: No bloat, no supply chain risk
+- **Tiny footprint**: ~50 lines of code, ~500 bytes minified + gzipped
+- **Hackable**: Easy to extend with plugins
+- **Isomorphic**: Works on server (Node.js) and browser
 
-``` npm
-npm install zzz-template --save
+## Installation
+
+```bash
+npm install zzz-template
 ```
 
 ### Compile example (see [examples/00-compile](examples/00-compile))
@@ -413,7 +432,13 @@ And if you do, please make sure you:
 ## Licence
 MIT
 
+## Related
 
+Looking for JavaScript template engines? Here are some alternatives:
+- [EJS](https://www.npmjs.com/package/ejs) - Embedded JavaScript templates
+- [Handlebars](https://www.npmjs.com/package/handlebars) - Semantic templates
+- [Mustache](https://www.npmjs.com/package/mustache) - Logic-less templates
+- [doT](https://www.npmjs.com/package/dot) - Fast template engine
 
 ---
-Docs revision: 2025-11-17T10:25:55.822Z
+Docs revision: 2025-11-23T20:04:26.847Z
