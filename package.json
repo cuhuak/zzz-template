@@ -39,9 +39,12 @@
   },
   "homepage": "https://github.com/cuhuak/zzz-template#readme",
   "main": "index.js",
+  "types": "index.d.ts",
   "files": [
     "index.js",
+    "index.d.ts",
     "fs.js",
+    "fs.d.ts",
     "readme.md",
     "LICENSE"
   ],
@@ -50,10 +53,12 @@
   },
   "exports": {
     ".": {
+      "types": "./index.d.ts",
       "import": "./index.js",
       "require": "./index.js"
     },
     "./fs.js": {
+      "types": "./fs.d.ts",
       "import": "./fs.js",
       "require": "./fs.js"
     }
