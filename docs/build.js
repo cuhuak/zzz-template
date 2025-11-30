@@ -1,8 +1,8 @@
 import { readFileSync, writeFileSync } from 'node:fs'
 import { join, parse } from 'node:path'
-import { ZzzBase, useFn, useInclude, useContentTrim, useIfMap } from 'zzz-template/fs.js'
+import { ZzzTemplateBase, useFn, useInclude, useContentTrim, useIfMap } from 'zzz-template'
 
-export class ZzzDocs extends ZzzBase {
+export class ZzzDocs extends ZzzTemplateBase {
   constructor ($this = {}) {
     super($this)
     this._dir = $this.dir || ''

@@ -1,10 +1,10 @@
 import {readFileSync} from 'node:fs'
 import {join} from "node:path"
-import {ZzzBase} from "./index.js"
+import {ZzzTemplateBase} from "./index.js"
 
 export * from './index.js'
 
-export class ZzzFs extends ZzzBase {
+export class ZzzTemplateNode extends ZzzTemplateBase {
   constructor($this = {}) {
     super($this)
     this._dir = $this.dir || ''
@@ -13,3 +13,6 @@ export class ZzzFs extends ZzzBase {
     return readFileSync(join(this._dir, f), "utf8")
   }
 }
+
+// @deprecated
+export const ZzzFs = ZzzTemplateNode

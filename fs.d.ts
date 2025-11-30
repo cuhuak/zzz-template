@@ -1,13 +1,13 @@
-import { ZzzBase } from "./index.js";
+import { ZzzTemplateBase } from "./index.js";
 
 export * from './index.js';
 
-export interface ZzzFsOptions extends Record<string, any> {
+export interface ZzzTemplateNodeOptions extends Record<string, any> {
   dir?: string;
 }
 
-export class ZzzFs extends ZzzBase {
+export class ZzzTemplateNode extends ZzzTemplateBase {
   _dir: string;
-  constructor($this?: ZzzFsOptions);
+  constructor($this?: ZzzTemplateNodeOptions);
   read(f: string): string;
 }

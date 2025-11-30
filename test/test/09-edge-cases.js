@@ -1,10 +1,10 @@
 import {it, describe} from 'node:test'
 import assert from 'node:assert'
-import {ZzzBase, useContentTrim, useIfMap, useInclude} from 'zzz-template'
+import {ZzzTemplateBase, useContentTrim, useIfMap, useInclude} from 'zzz-template'
 
 describe('Edge Cases', () => {
   describe('empty string templates', () => {
-    const renderer = new ZzzBase()
+    const renderer = new ZzzTemplateBase()
 
     it('should handle empty template', () => {
       const fn = renderer.compile('')
@@ -19,7 +19,7 @@ describe('Edge Cases', () => {
     })
 
     it('should trim empty template', () => {
-      const renderer2 = new ZzzBase()
+      const renderer2 = new ZzzTemplateBase()
       useContentTrim(renderer2)
       const fn = renderer2.compile('   ')
       const result = fn({})
@@ -28,7 +28,7 @@ describe('Edge Cases', () => {
   })
 
   describe('very long strings', () => {
-    const renderer = new ZzzBase()
+    const renderer = new ZzzTemplateBase()
 
     it('should handle 10KB template', () => {
       const longText = 'a'.repeat(10000)
@@ -54,7 +54,7 @@ describe('Edge Cases', () => {
   })
 
   describe('special characters', () => {
-    const renderer = new ZzzBase()
+    const renderer = new ZzzTemplateBase()
 
     it('should handle quotes in template', () => {
       const fn = renderer.compile('He said "Hello" and \'Hi\'')
@@ -88,7 +88,7 @@ describe('Edge Cases', () => {
   })
 
   describe('unicode and emoji in templates', () => {
-    const renderer = new ZzzBase()
+    const renderer = new ZzzTemplateBase()
 
     it('should handle emoji', () => {
       const fn = renderer.compile('Hello 👋 World 🌍')
@@ -122,7 +122,7 @@ describe('Edge Cases', () => {
   })
 
   describe('HTML entities', () => {
-    const renderer = new ZzzBase()
+    const renderer = new ZzzTemplateBase()
 
     it('should preserve HTML entities', () => {
       const fn = renderer.compile('&lt;div&gt; &amp; &quot;')
@@ -144,7 +144,7 @@ describe('Edge Cases', () => {
   })
 
   describe('template with only variables', () => {
-    const renderer = new ZzzBase()
+    const renderer = new ZzzTemplateBase()
 
     it('should handle single variable', () => {
       const fn = renderer.compile('${data.value}')
@@ -166,7 +166,7 @@ describe('Edge Cases', () => {
   })
 
   describe('template with only static text', () => {
-    const renderer = new ZzzBase()
+    const renderer = new ZzzTemplateBase()
 
     it('should handle static text with no variables', () => {
       const fn = renderer.compile('Hello World!')
@@ -183,7 +183,7 @@ describe('Edge Cases', () => {
   })
 
   describe('dollar sign without braces', () => {
-    const renderer = new ZzzBase()
+    const renderer = new ZzzTemplateBase()
 
     it('should preserve standalone dollar sign', () => {
       const fn = renderer.compile('Price: $10')
@@ -205,7 +205,7 @@ describe('Edge Cases', () => {
   })
 
   describe('nested template literals', () => {
-    const renderer = new ZzzBase()
+    const renderer = new ZzzTemplateBase()
     useIfMap(renderer)
 
     it('should handle escaped nested templates', () => {
@@ -222,7 +222,7 @@ describe('Edge Cases', () => {
   })
 
   describe('extreme nesting', () => {
-    const renderer = new ZzzBase()
+    const renderer = new ZzzTemplateBase()
 
     it('should handle deeply nested property access', () => {
       const fn = renderer.compile('${data.a.b.c.d.e}')
@@ -238,7 +238,7 @@ describe('Edge Cases', () => {
   })
 
   describe('template with comments-like text', () => {
-    const renderer = new ZzzBase()
+    const renderer = new ZzzTemplateBase()
 
     it('should preserve comment-like syntax', () => {
       const fn = renderer.compile('<!-- This looks like a comment -->')
@@ -254,7 +254,7 @@ describe('Edge Cases', () => {
   })
 
   describe('data with circular references', () => {
-    const renderer = new ZzzBase()
+    const renderer = new ZzzTemplateBase()
 
     it('should handle circular object in data (JSON.stringify throws)', () => {
       const circular = {a: 1}
@@ -267,7 +267,7 @@ describe('Edge Cases', () => {
   })
 
   describe('undefined vs null handling', () => {
-    const renderer = new ZzzBase()
+    const renderer = new ZzzTemplateBase()
 
     it('should distinguish undefined from null in output', () => {
       const fn = renderer.compile('Undefined: ${data.undef}, Null: ${data.nul}')
@@ -283,7 +283,7 @@ describe('Edge Cases', () => {
   })
 
   describe('numbers and numeric edge cases', () => {
-    const renderer = new ZzzBase()
+    const renderer = new ZzzTemplateBase()
 
     it('should handle zero', () => {
       const fn = renderer.compile('${data.val}')
@@ -335,7 +335,7 @@ describe('Edge Cases', () => {
   })
 
   describe('whitespace handling', () => {
-    const renderer = new ZzzBase()
+    const renderer = new ZzzTemplateBase()
 
     it('should preserve leading whitespace', () => {
       const fn = renderer.compile('   text')
@@ -368,7 +368,7 @@ describe('Edge Cases', () => {
       'empty': '',
     }
 
-    const renderer = new ZzzBase()
+    const renderer = new ZzzTemplateBase()
     renderer.read = (f) => templates[f]
     useInclude(renderer)
 
@@ -379,7 +379,7 @@ describe('Edge Cases', () => {
   })
 
   describe('MAP with single item', () => {
-    const renderer = new ZzzBase()
+    const renderer = new ZzzTemplateBase()
     useIfMap(renderer)
 
     it('should handle single item array', () => {
@@ -390,7 +390,7 @@ describe('Edge Cases', () => {
   })
 
   describe('boolean in templates', () => {
-    const renderer = new ZzzBase()
+    const renderer = new ZzzTemplateBase()
 
     it('should render true as string', () => {
       const fn = renderer.compile('${data.val}')

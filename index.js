@@ -1,4 +1,4 @@
-export class ZzzBase {
+export class ZzzTemplateBase {
   s = [] // s - start, before content
   e = [] // e - end, after content
   constructor($this = {}) {
@@ -13,7 +13,7 @@ export class ZzzBase {
   }
   read(f) {} // must be implemented
 }
-export class ZzzBrowser extends ZzzBase {
+export class ZzzTemplate extends ZzzTemplateBase {
   read (f) {
     return window.document.getElementById(f).innerText
   }
@@ -47,3 +47,6 @@ export function useIfMap(zzz, aliases = true) {
   useFn(zzz, function map_template(arr, str) {return arr.map(x => {return zzz.compile(str, this.local)(x)}).join('')}, aliases && 'MAP')
   useFn(zzz, function map_include(arr, file) {return arr.map(x => {return this.include(file, x)}).join('')}, aliases && 'MAPI')
 }
+
+// @deprecated
+export const ZzzBrowser = ZzzTemplate

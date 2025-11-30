@@ -1,6 +1,6 @@
-import {useLayout, useLocal, useContentTrim, ZzzFs} from "zzz-template/fs.js"
+import {useLayout, useLocal, useContentTrim, ZzzTemplateNode} from "zzz-template/node.js"
 
-const renderer = new ZzzFs()
+const renderer = new ZzzTemplateNode()
 
 useContentTrim(renderer)
 useLocal(renderer)

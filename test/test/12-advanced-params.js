@@ -1,10 +1,10 @@
 import {it, describe} from 'node:test'
 import assert from 'node:assert'
-import {ZzzBase, useLayout, useLocal, useIfMap, useInclude} from 'zzz-template'
+import {ZzzTemplateBase, useLayout, useLocal, useIfMap, useInclude} from 'zzz-template'
 
 describe('Advanced Plugin Parameters', () => {
   describe('compile with custom sign parameter', () => {
-    const renderer = new ZzzBase()
+    const renderer = new ZzzTemplateBase()
 
     it('should use default sign "data, parent"', () => {
       const fn = renderer.compile('${data.name}')
@@ -39,7 +39,7 @@ describe('Advanced Plugin Parameters', () => {
 
   describe('useIfMap with aliases parameter', () => {
     it('should create aliases by default (aliases=true)', () => {
-      const renderer = new ZzzBase()
+      const renderer = new ZzzTemplateBase()
       useIfMap(renderer)
 
       const fn = renderer.compile('${IF(data.show, "visible", data)}')
@@ -48,7 +48,7 @@ describe('Advanced Plugin Parameters', () => {
     })
 
     it('should not create aliases when aliases=false', () => {
-      const renderer = new ZzzBase()
+      const renderer = new ZzzTemplateBase()
       useIfMap(renderer, false)
 
       // Functions should be available via this.$
@@ -58,7 +58,7 @@ describe('Advanced Plugin Parameters', () => {
     })
 
     it('should throw ReferenceError when using IF without aliases', () => {
-      const renderer = new ZzzBase()
+      const renderer = new ZzzTemplateBase()
       useIfMap(renderer, false)
 
       assert.throws(() => {
@@ -68,7 +68,7 @@ describe('Advanced Plugin Parameters', () => {
     })
 
     it('should access TEMPLATE via this.template when aliases=false', () => {
-      const renderer = new ZzzBase()
+      const renderer = new ZzzTemplateBase()
       useIfMap(renderer, false)
 
       const fn = renderer.compile('${this.template("Hello ${data.name}", {name: "World"})}')
@@ -77,7 +77,7 @@ describe('Advanced Plugin Parameters', () => {
     })
 
     it('should access MAP via this.map_template when aliases=false', () => {
-      const renderer = new ZzzBase()
+      const renderer = new ZzzTemplateBase()
       useIfMap(renderer, false)
 
       const fn = renderer.compile('${this.map_template(data.items, "<i>${data}</i>")}')
@@ -91,7 +91,7 @@ describe('Advanced Plugin Parameters', () => {
         'item': '<li>${data}</li>',
       }
 
-      const renderer = new ZzzBase()
+      const renderer = new ZzzTemplateBase()
       renderer.read = (f) => templates[f]
       useIfMap(renderer, false)
 
@@ -105,7 +105,7 @@ describe('Advanced Plugin Parameters', () => {
         'partial': 'Content: ${data.value}',
       }
 
-      const renderer = new ZzzBase()
+      const renderer = new ZzzTemplateBase()
       renderer.read = (f) => templates[f]
       useIfMap(renderer, false)
 
@@ -121,7 +121,7 @@ describe('Advanced Plugin Parameters', () => {
         'layout': '<div>${data.content}</div>',
       }
 
-      const renderer = new ZzzBase()
+      const renderer = new ZzzTemplateBase()
       renderer.read = (f) => templates[f]
       useLayout(renderer)
 
@@ -135,7 +135,7 @@ describe('Advanced Plugin Parameters', () => {
         'layout': '<div>${data.content}</div>',
       }
 
-      const renderer = new ZzzBase()
+      const renderer = new ZzzTemplateBase()
       renderer.read = (f) => templates[f]
       useLayout(renderer, 'L')
 
@@ -149,7 +149,7 @@ describe('Advanced Plugin Parameters', () => {
         'layout': '<h1>${data.title}</h1>${data.content}',
       }
 
-      const renderer = new ZzzBase()
+      const renderer = new ZzzTemplateBase()
       renderer.read = (f) => templates[f]
       useLayout(renderer, 'WRAP')
 
@@ -163,7 +163,7 @@ describe('Advanced Plugin Parameters', () => {
         'layout': '<div>${data.content}</div>',
       }
 
-      const renderer = new ZzzBase()
+      const renderer = new ZzzTemplateBase()
       renderer.read = (f) => templates[f]
       useLayout(renderer, 'L')
 
@@ -175,7 +175,7 @@ describe('Advanced Plugin Parameters', () => {
 
   describe('useLocal with custom aliases', () => {
     it('should use SET and SETA as default aliases', () => {
-      const renderer = new ZzzBase()
+      const renderer = new ZzzTemplateBase()
       useLocal(renderer)
 
       const fn = renderer.compile('${SET("x", 1)}${SETA("y", 2, 3)}${local.x},${local.y}', {})
@@ -184,7 +184,7 @@ describe('Advanced Plugin Parameters', () => {
     })
 
     it('should use custom aliases when provided', () => {
-      const renderer = new ZzzBase()
+      const renderer = new ZzzTemplateBase()
       useLocal(renderer, 'VAR', 'PUSH')
 
       const fn = renderer.compile('${VAR("x", 1)}${PUSH("y", 2, 3)}${local.x},${local.y}', {})
@@ -193,7 +193,7 @@ describe('Advanced Plugin Parameters', () => {
     })
 
     it('should use LET and APPEND as custom aliases', () => {
-      const renderer = new ZzzBase()
+      const renderer = new ZzzTemplateBase()
       useLocal(renderer, 'LET', 'APPEND')
 
       const fn = renderer.compile('${LET("name", "Alice")}${APPEND("tags", "js", "css")}${local.name}:${local.tags}', {})
@@ -202,7 +202,7 @@ describe('Advanced Plugin Parameters', () => {
     })
 
     it('should throw error when using SET with custom aliases', () => {
-      const renderer = new ZzzBase()
+      const renderer = new ZzzTemplateBase()
       useLocal(renderer, 'VAR', 'PUSH')
 
       assert.throws(() => {
@@ -212,7 +212,7 @@ describe('Advanced Plugin Parameters', () => {
     })
 
     it('should throw error when using SETA with custom aliases', () => {
-      const renderer = new ZzzBase()
+      const renderer = new ZzzTemplateBase()
       useLocal(renderer, 'VAR', 'PUSH')
 
       assert.throws(() => {
@@ -222,7 +222,7 @@ describe('Advanced Plugin Parameters', () => {
     })
 
     it('should allow single character aliases', () => {
-      const renderer = new ZzzBase()
+      const renderer = new ZzzTemplateBase()
       useLocal(renderer, 'S', 'A')
 
       const fn = renderer.compile('${S("x", 10)}${A("x", 20)}${local.x}', {})
@@ -238,7 +238,7 @@ describe('Advanced Plugin Parameters', () => {
         'partial': 'Hello ${data.name}!',
       }
 
-      const renderer = new ZzzBase()
+      const renderer = new ZzzTemplateBase()
       renderer.read = (f) => templates[f]
       useInclude(renderer)
 
@@ -252,7 +252,7 @@ describe('Advanced Plugin Parameters', () => {
         'partial': 'Hello ${data.name}!',
       }
 
-      const renderer = new ZzzBase()
+      const renderer = new ZzzTemplateBase()
       renderer.read = (f) => templates[f]
       useInclude(renderer, 'LOAD')
 
@@ -266,7 +266,7 @@ describe('Advanced Plugin Parameters', () => {
         'content': 'Content: ${data.value}',
       }
 
-      const renderer = new ZzzBase()
+      const renderer = new ZzzTemplateBase()
       renderer.read = (f) => templates[f]
       useInclude(renderer, 'PARTIAL')
 
@@ -283,7 +283,7 @@ describe('Advanced Plugin Parameters', () => {
         'header': '<h1>${local.title}</h1>',
       }
 
-      const renderer = new ZzzBase()
+      const renderer = new ZzzTemplateBase()
       renderer.read = (f) => templates[f]
       useLocal(renderer, 'V', 'A')
       useLayout(renderer, 'W')
@@ -294,7 +294,7 @@ describe('Advanced Plugin Parameters', () => {
     })
 
     it('should work with useIfMap aliases=false and custom local aliases', () => {
-      const renderer = new ZzzBase()
+      const renderer = new ZzzTemplateBase()
       useLocal(renderer, 'DEF', 'ADD')
       useIfMap(renderer, false)
 
@@ -306,7 +306,7 @@ describe('Advanced Plugin Parameters', () => {
 
   describe('parent parameter in nested contexts', () => {
     it('should pass parent data to nested compile', () => {
-      const renderer = new ZzzBase()
+      const renderer = new ZzzTemplateBase()
       renderer.read = () => {}
 
       // Simulate nested rendering where parent is used
@@ -318,14 +318,14 @@ describe('Advanced Plugin Parameters', () => {
     })
 
     it('should handle undefined parent parameter', () => {
-      const renderer = new ZzzBase()
+      const renderer = new ZzzTemplateBase()
       const fn = renderer.compile('data: ${data}, parent: ${parent}', {}, 'data, parent')
       const result = fn('value')
       assert.strictEqual(result, 'data: value, parent: undefined')
     })
 
     it('should use parent in complex template', () => {
-      const renderer = new ZzzBase()
+      const renderer = new ZzzTemplateBase()
       const fn = renderer.compile('${data.child} from ${parent.name}', {}, 'data, parent')
       const result = fn({child: 'Alice'}, {name: 'Bob'})
       assert.strictEqual(result, 'Alice from Bob')

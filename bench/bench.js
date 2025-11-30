@@ -2,7 +2,7 @@ import fs from 'fs'
 import { fileURLToPath } from 'url'
 import { dirname } from 'node:path'
 import Benchmark from 'benchmark'
-import { ZzzBase } from 'zzz-template'
+import { ZzzTemplateBase } from 'zzz-template'
 import templateLiteral from 'template-literal'
 import zup from 'zup'
 import ejs from 'ejs'
@@ -25,7 +25,7 @@ const wait = () =>
 const NUMBER_OF_TESTS = 15
 
 async function run() {
-  const zzz = new ZzzBase()
+  const zzz = new ZzzTemplateBase()
   const compileZzz = zzz.compile.bind(zzz)
   const compileVanilla = function (tpl) { return new Function('data', `\`${tpl}\``) }
   const compileTemplateLiteral = templateLiteral

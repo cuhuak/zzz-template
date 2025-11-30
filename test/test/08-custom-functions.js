@@ -1,10 +1,10 @@
 import {it, describe} from 'node:test'
 import assert from 'node:assert'
-import {ZzzBase, useFn, useLocal} from 'zzz-template'
+import {ZzzTemplateBase, useFn, useLocal} from 'zzz-template'
 
 describe('useFn - Custom Functions', () => {
   describe('register custom function with useFn', () => {
-    const renderer = new ZzzBase()
+    const renderer = new ZzzTemplateBase()
 
     function greet(name) {
       return `Hello, ${name}!`
@@ -25,7 +25,7 @@ describe('useFn - Custom Functions', () => {
   })
 
   describe('custom function with alias', () => {
-    const renderer = new ZzzBase()
+    const renderer = new ZzzTemplateBase()
 
     function uppercase(str) {
       return str.toUpperCase()
@@ -47,7 +47,7 @@ describe('useFn - Custom Functions', () => {
   })
 
   describe('custom function without alias', () => {
-    const renderer = new ZzzBase()
+    const renderer = new ZzzTemplateBase()
 
     function reverse(str) {
       return str.split('').reverse().join('')
@@ -68,7 +68,7 @@ describe('useFn - Custom Functions', () => {
   })
 
   describe('multiple custom functions', () => {
-    const renderer = new ZzzBase()
+    const renderer = new ZzzTemplateBase()
 
     function add(a, b) {
       return a + b
@@ -100,7 +100,7 @@ describe('useFn - Custom Functions', () => {
   })
 
   describe('custom function accessing this.local', () => {
-    const renderer = new ZzzBase()
+    const renderer = new ZzzTemplateBase()
     useLocal(renderer)
 
     function getLocal(key) {
@@ -123,7 +123,7 @@ describe('useFn - Custom Functions', () => {
   })
 
   describe('custom function with complex logic', () => {
-    const renderer = new ZzzBase()
+    const renderer = new ZzzTemplateBase()
 
     function formatPrice(price, currency = 'USD') {
       const symbols = {USD: '$', EUR: '€', GBP: '£'}
@@ -153,7 +153,7 @@ describe('useFn - Custom Functions', () => {
   })
 
   describe('custom function returning objects/arrays', () => {
-    const renderer = new ZzzBase()
+    const renderer = new ZzzTemplateBase()
 
     function createUser(name, age) {
       return {name, age}
@@ -186,7 +186,7 @@ describe('useFn - Custom Functions', () => {
   })
 
   describe('custom function with arrow function', () => {
-    const renderer = new ZzzBase()
+    const renderer = new ZzzTemplateBase()
 
     const double = (n) => n * 2
     const triple = (n) => n * 3
@@ -202,7 +202,7 @@ describe('useFn - Custom Functions', () => {
   })
 
   describe('custom function modifying renderer state', () => {
-    const renderer = new ZzzBase()
+    const renderer = new ZzzTemplateBase()
     useLocal(renderer)
 
     function saveToLocal(key, value) {
@@ -220,7 +220,7 @@ describe('useFn - Custom Functions', () => {
   })
 
   describe('custom function with variable arguments', () => {
-    const renderer = new ZzzBase()
+    const renderer = new ZzzTemplateBase()
 
     function sum(...numbers) {
       return numbers.reduce((a, b) => a + b, 0)
@@ -247,7 +247,7 @@ describe('useFn - Custom Functions', () => {
   })
 
   describe('escapeHtml custom function (from README)', () => {
-    const renderer = new ZzzBase()
+    const renderer = new ZzzTemplateBase()
 
     function escapeHtml(unsafe) {
       return unsafe
@@ -274,7 +274,7 @@ describe('useFn - Custom Functions', () => {
   })
 
   describe('custom function overriding built-in', () => {
-    const renderer = new ZzzBase()
+    const renderer = new ZzzTemplateBase()
 
     function customTemplate(str, data) {
       return `CUSTOM: ${str}`
@@ -290,7 +290,7 @@ describe('useFn - Custom Functions', () => {
   })
 
   describe('custom function with context binding', () => {
-    const renderer = new ZzzBase()
+    const renderer = new ZzzTemplateBase()
 
     renderer.$.config = {prefix: 'PREFIX'}
 

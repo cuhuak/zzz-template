@@ -1,6 +1,6 @@
 import {it, describe} from 'node:test'
 import assert from 'node:assert'
-import {ZzzBase, useLayout, useInclude, useLocal, useIfMap, useContentTrim, useFn} from 'zzz-template'  // useInclude kept for standalone usage
+import {ZzzTemplateBase, useLayout, useInclude, useLocal, useIfMap, useContentTrim, useFn} from 'zzz-template'  // useInclude kept for standalone usage
 
 describe('Integration Tests', () => {
   describe('all plugins enabled together', () => {
@@ -18,7 +18,7 @@ describe('Integration Tests', () => {
       'product-price': '<p>${PRICE(data.price)}</p>',
     }
 
-    const renderer = new ZzzBase()
+    const renderer = new ZzzTemplateBase()
     renderer.read = (f) => templates[f]
 
     useLayout(renderer)  // useLayout includes useInclude
@@ -90,7 +90,7 @@ describe('Integration Tests', () => {
       'comment': '<div class="comment"><strong>\${data.author}:</strong> \${data.text}</div>',
     }
 
-    const renderer = new ZzzBase()
+    const renderer = new ZzzTemplateBase()
     renderer.read = (f) => templates[f]
 
     useLayout(renderer)  // useLayout includes useInclude
@@ -145,7 +145,7 @@ describe('Integration Tests', () => {
       'template': 'Hello \${data.name}!',
     }
 
-    const renderer = new ZzzBase()
+    const renderer = new ZzzTemplateBase()
     renderer.read = (f) => templates[f]
 
     it('should handle multiple renders correctly', () => {
@@ -164,7 +164,7 @@ describe('Integration Tests', () => {
       'template': '\${SET("x", data.value)}Result: \${local.x}',
     }
 
-    const renderer = new ZzzBase()
+    const renderer = new ZzzTemplateBase()
     renderer.read = (f) => templates[f]
     useLocal(renderer)
 
@@ -178,7 +178,7 @@ describe('Integration Tests', () => {
   })
 
   describe('reusing compiled functions', () => {
-    const renderer = new ZzzBase()
+    const renderer = new ZzzTemplateBase()
     const fn = renderer.compile('Hello \${data.name}, you are \${data.age} years old.')
 
     it('should reuse compiled function multiple times', () => {
@@ -207,7 +207,7 @@ describe('Integration Tests', () => {
       'user-layout': '<user>\${data.content}</user>',
     }
 
-    const renderer = new ZzzBase()
+    const renderer = new ZzzTemplateBase()
     renderer.read = (f) => templates[f]
     useLayout(renderer)
 
@@ -230,7 +230,7 @@ describe('Integration Tests', () => {
       'template-c': 'Template C: \${data.value}',
     }
 
-    const renderer = new ZzzBase()
+    const renderer = new ZzzTemplateBase()
     renderer.read = (f) => templates[f]
     useInclude(renderer)
 
@@ -255,7 +255,7 @@ describe('Integration Tests', () => {
       `,
     }
 
-    const renderer = new ZzzBase()
+    const renderer = new ZzzTemplateBase()
     renderer.read = (f) => templates[f]
     useIfMap(renderer)
     useContentTrim(renderer)
@@ -284,7 +284,7 @@ describe('Integration Tests', () => {
       'l3': 'L3(level=\${data.level}):\${data.content}',
     }
 
-    const renderer = new ZzzBase()
+    const renderer = new ZzzTemplateBase()
     renderer.read = (f) => templates[f]
     useLayout(renderer)
 
@@ -295,7 +295,7 @@ describe('Integration Tests', () => {
   })
 
   describe('performance: many iterations', () => {
-    const renderer = new ZzzBase()
+    const renderer = new ZzzTemplateBase()
     useIfMap(renderer)
 
     it('should handle large arrays efficiently', () => {
@@ -333,7 +333,7 @@ describe('Integration Tests', () => {
       'empty-state': '<div class="empty">No items to display</div>',
     }
 
-    const renderer = new ZzzBase()
+    const renderer = new ZzzTemplateBase()
     renderer.read = (f) => templates[f]
     useLayout(renderer)  // useLayout includes useInclude
     useLocal(renderer)

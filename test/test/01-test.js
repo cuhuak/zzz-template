@@ -1,11 +1,11 @@
 import {it, describe} from 'node:test'
 import assert from 'node:assert'
 
-import {ZzzBase, useLayout, useLocal, useContentTrim, ZzzFs} from 'zzz-template/fs.js'
+import {ZzzTemplateBase, useLayout, useLocal, useContentTrim, ZzzTemplateNode} from 'zzz-template/node.js'
 
 describe('compile', () => {
   describe('basic', () => {
-    const renderer = new ZzzBase
+    const renderer = new ZzzTemplateBase
     const tpl = "Hello ${data.name}!"
     const fn = renderer.compile(tpl)
     assert.strictEqual(typeof fn, 'function')
@@ -47,7 +47,7 @@ describe('compile', () => {
   })
 
   describe('trim', () => {
-    const renderer = new ZzzBase()
+    const renderer = new ZzzTemplateBase()
     useContentTrim(renderer)
 
     const tpl = " Hello ${data.name}! "
@@ -62,7 +62,7 @@ describe('compile', () => {
 })
 
 describe('render, default read', () => {
-  const renderer = new ZzzFs({dir: import.meta.dirname})
+  const renderer = new ZzzTemplateNode({dir: import.meta.dirname})
   useContentTrim(renderer)
   useLayout(renderer)
 
@@ -84,7 +84,7 @@ describe('render, default read', () => {
 })
 
 describe('render, custom read fs (test/dir)', () => {
-  const renderer = new ZzzFs({dir: `${import.meta.dirname}/templates`})
+  const renderer = new ZzzTemplateNode({dir: `${import.meta.dirname}/templates`})
   useLocal(renderer)
   useContentTrim(renderer)
   useLayout(renderer)
@@ -115,7 +115,7 @@ describe('render, custom read (mem)', () => {
     'layout.html': ' <layout>${data.content}</layout> ',
   }
 
-  const renderer = new ZzzBase()
+  const renderer = new ZzzTemplateBase()
   useContentTrim(renderer)
   useLayout(renderer)
   renderer.read = (f) => {return templates[f]}
@@ -145,7 +145,7 @@ describe('useLocal shallow copy', () => {
     'layout': ' <layout>${data.content}</layout> ',
   }
 
-  const renderer = new ZzzBase()
+  const renderer = new ZzzTemplateBase()
   useLocal(renderer)
   useContentTrim(renderer)
   renderer.read = (f) => {return templates[f]}
@@ -186,7 +186,7 @@ describe('useLocal shallow copy', () => {
 })
 
 describe('useLocal', () => {
-  const renderer = new ZzzBase()
+  const renderer = new ZzzTemplateBase()
   useLocal(renderer)
 
   describe('set', () => {

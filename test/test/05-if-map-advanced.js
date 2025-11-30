@@ -1,10 +1,10 @@
 import {it, describe} from 'node:test'
 import assert from 'node:assert'
-import {ZzzBase, useIfMap, useLocal} from 'zzz-template'
+import {ZzzTemplateBase, useIfMap, useLocal} from 'zzz-template'
 
 describe('Complex useIfMap Scenarios', () => {
   describe('nested IF statements', () => {
-    const renderer = new ZzzBase()
+    const renderer = new ZzzTemplateBase()
     useIfMap(renderer)
 
     it('should support nested IF with both true', () => {
@@ -27,7 +27,7 @@ describe('Complex useIfMap Scenarios', () => {
   })
 
   describe('IF inside MAP', () => {
-    const renderer = new ZzzBase()
+    const renderer = new ZzzTemplateBase()
     useIfMap(renderer)
 
     it('should use IF inside MAP to conditionally render items', () => {
@@ -46,7 +46,7 @@ describe('Complex useIfMap Scenarios', () => {
   })
 
   describe('MAP inside IF', () => {
-    const renderer = new ZzzBase()
+    const renderer = new ZzzTemplateBase()
     useIfMap(renderer)
 
     it('should render MAP when condition is true', () => {
@@ -70,7 +70,7 @@ describe('Complex useIfMap Scenarios', () => {
       'user-age': '<span>${data.age}</span>',
     }
 
-    const renderer = new ZzzBase()
+    const renderer = new ZzzTemplateBase()
     renderer.read = (f) => templates[f]
     useIfMap(renderer)  // useIfMap includes useInclude internally
 
@@ -90,7 +90,7 @@ describe('Complex useIfMap Scenarios', () => {
       'footer': '</header>',
     }
 
-    const renderer = new ZzzBase()
+    const renderer = new ZzzTemplateBase()
     renderer.read = (f) => templates[f]
     useIfMap(renderer)  // useIfMap includes useInclude internally
 
@@ -118,7 +118,7 @@ describe('Complex useIfMap Scenarios', () => {
       'item': '<li>${data}</li>',
     }
 
-    const renderer = new ZzzBase()
+    const renderer = new ZzzTemplateBase()
     renderer.read = (f) => templates[f]
     useIfMap(renderer)
 
@@ -134,7 +134,7 @@ describe('Complex useIfMap Scenarios', () => {
   })
 
   describe('falsy values in IF conditions', () => {
-    const renderer = new ZzzBase()
+    const renderer = new ZzzTemplateBase()
     useIfMap(renderer)
 
     it('should handle 0 as falsy', () => {
@@ -175,7 +175,7 @@ describe('Complex useIfMap Scenarios', () => {
   })
 
   describe('truthy values in IF conditions', () => {
-    const renderer = new ZzzBase()
+    const renderer = new ZzzTemplateBase()
     useIfMap(renderer)
 
     it('should handle non-zero number as truthy', () => {
@@ -210,7 +210,7 @@ describe('Complex useIfMap Scenarios', () => {
   })
 
   describe('complex IF/MAP combinations', () => {
-    const renderer = new ZzzBase()
+    const renderer = new ZzzTemplateBase()
     useIfMap(renderer)
 
     it('should support IF inside MAP inside IF', () => {
@@ -227,7 +227,7 @@ describe('Complex useIfMap Scenarios', () => {
   })
 
   describe('MAP/MAPI with complex data transformations', () => {
-    const renderer = new ZzzBase()
+    const renderer = new ZzzTemplateBase()
     useIfMap(renderer)
 
     it('should support arithmetic in MAP', () => {
@@ -256,7 +256,7 @@ describe('Complex useIfMap Scenarios', () => {
       'minor': 'Minor: ${data.name}',
     }
 
-    const renderer = new ZzzBase()
+    const renderer = new ZzzTemplateBase()
     renderer.read = (f) => templates[f]
     useIfMap(renderer)
 
@@ -281,7 +281,7 @@ describe('Complex useIfMap Scenarios', () => {
       'main': '${SET("prefix", "Item")}${MAP(data.items, "\\${local.prefix}: \\${data}")}',
     }
 
-    const renderer = new ZzzBase()
+    const renderer = new ZzzTemplateBase()
     renderer.read = (f) => templates[f]
     useIfMap(renderer)
     useLocal(renderer)

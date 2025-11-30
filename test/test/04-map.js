@@ -1,6 +1,6 @@
 import {it, describe} from 'node:test'
 import assert from 'node:assert'
-import {ZzzBase, useIfMap} from 'zzz-template'
+import {ZzzTemplateBase, useIfMap} from 'zzz-template'
 
 describe('map (mem)', () => {
   const templates = {
@@ -14,7 +14,7 @@ describe('map (mem)', () => {
     'template_objects': "${data.number}",
   }
 
-  const renderer = new ZzzBase()
+  const renderer = new ZzzTemplateBase()
   renderer.read = (f) => templates[f]
   useIfMap(renderer)
 

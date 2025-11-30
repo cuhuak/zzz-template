@@ -1,4 +1,4 @@
-export class ZzzBase {
+export class ZzzTemplateBase {
   s: string[];
   e: string[];
   $: Record<string, any>;
@@ -8,13 +8,13 @@ export class ZzzBase {
   read(f: string): string;
 }
 
-export class ZzzBrowser extends ZzzBase {
+export class ZzzBrowser extends ZzzTemplateBase {
   read(f: string): string;
 }
 
-export function useFn(zzz: ZzzBase, fn: Function, alias?: string | false): void;
-export function useContentTrim(zzz: ZzzBase): void;
-export function useInclude(zzz: ZzzBase, alias?: string): void;
-export function useLayout(zzz: ZzzBase, alias?: string): void;
-export function useLocal(zzz: ZzzBase, aliasSet?: string, aliasSeta?: string): void;
-export function useIfMap(zzz: ZzzBase, aliases?: boolean): void;
+export function useFn(zzz: ZzzTemplateBase, fn: Function, alias?: string | false): void;
+export function useContentTrim(zzz: ZzzTemplateBase): void;
+export function useInclude(zzz: ZzzTemplateBase, alias?: string): void;
+export function useLayout(zzz: ZzzTemplateBase, alias?: string): void;
+export function useLocal(zzz: ZzzTemplateBase, aliasSet?: string, aliasSeta?: string): void;
+export function useIfMap(zzz: ZzzTemplateBase, aliases?: boolean): void;

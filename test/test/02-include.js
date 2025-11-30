@@ -1,6 +1,6 @@
 import {it, describe} from 'node:test'
 import assert from 'node:assert'
-import {ZzzBase, useInclude, useLocal} from 'zzz-template'
+import {ZzzTemplateBase, useInclude, useLocal} from 'zzz-template'
 
 describe('useInclude', () => {
   describe('basic INCLUDE functionality', () => {
@@ -9,7 +9,7 @@ describe('useInclude', () => {
       'partial': 'Hello ${data.name}!',
     }
 
-    const renderer = new ZzzBase()
+    const renderer = new ZzzTemplateBase()
     renderer.read = (f) => templates[f]
     useInclude(renderer)
 
@@ -25,7 +25,7 @@ describe('useInclude', () => {
       'user': '${data.name}:${data.age}',
     }
 
-    const renderer = new ZzzBase()
+    const renderer = new ZzzTemplateBase()
     renderer.read = (f) => templates[f]
     useInclude(renderer)
 
@@ -42,7 +42,7 @@ describe('useInclude', () => {
       'level2': 'Level 2 (${data.n})',
     }
 
-    const renderer = new ZzzBase()
+    const renderer = new ZzzTemplateBase()
     renderer.read = (f) => templates[f]
     useInclude(renderer)
 
@@ -58,7 +58,7 @@ describe('useInclude', () => {
       'partial': 'Title: ${local.title}, Hello ${data.name}!',
     }
 
-    const renderer = new ZzzBase()
+    const renderer = new ZzzTemplateBase()
     renderer.read = (f) => templates[f]
     useInclude(renderer)
     useLocal(renderer)
@@ -75,7 +75,7 @@ describe('useInclude', () => {
       'partial': 'Data: ${data}',
     }
 
-    const renderer = new ZzzBase()
+    const renderer = new ZzzTemplateBase()
     renderer.read = (f) => templates[f]
     useInclude(renderer)
 
@@ -96,7 +96,7 @@ describe('useInclude', () => {
       'greeting': 'Hello ${data.name}!',
     }
 
-    const renderer = new ZzzBase()
+    const renderer = new ZzzTemplateBase()
     renderer.read = (f) => templates[f]
     useInclude(renderer, 'PARTIAL')
 
@@ -114,7 +114,7 @@ describe('useInclude', () => {
       'footer': '<footer>Footer</footer>',
     }
 
-    const renderer = new ZzzBase()
+    const renderer = new ZzzTemplateBase()
     renderer.read = (f) => templates[f]
     useInclude(renderer)
 
@@ -130,7 +130,7 @@ describe('useInclude', () => {
       'list': 'Items: ${data.items.join(", ")}',
     }
 
-    const renderer = new ZzzBase()
+    const renderer = new ZzzTemplateBase()
     renderer.read = (f) => templates[f]
     useInclude(renderer)
 
@@ -146,7 +146,7 @@ describe('useInclude', () => {
       'child': 'Child: ${data.child}',
     }
 
-    const renderer = new ZzzBase()
+    const renderer = new ZzzTemplateBase()
     renderer.read = (f) => templates[f]
     useInclude(renderer)
 

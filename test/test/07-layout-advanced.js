@@ -1,6 +1,6 @@
 import {it, describe} from 'node:test'
 import assert from 'node:assert'
-import {ZzzBase, useLayout, useLocal, useIfMap, useContentTrim} from 'zzz-template'
+import {ZzzTemplateBase, useLayout, useLocal, useIfMap, useContentTrim} from 'zzz-template'
 
 describe('Advanced Layout Tests', () => {
   describe('nested layouts (layout → layout → layout)', () => {
@@ -11,7 +11,7 @@ describe('Advanced Layout Tests', () => {
       'layout3': '<div class="layout3">${data.content}</div>',
     }
 
-    const renderer = new ZzzBase()
+    const renderer = new ZzzTemplateBase()
     renderer.read = (f) => templates[f]
     useLayout(renderer)
 
@@ -32,7 +32,7 @@ describe('Advanced Layout Tests', () => {
       'footer': '<footer>Footer</footer>',
     }
 
-    const renderer = new ZzzBase()
+    const renderer = new ZzzTemplateBase()
     renderer.read = (f) => templates[f]
     useLayout(renderer)  // useLayout includes useInclude internally
 
@@ -49,7 +49,7 @@ describe('Advanced Layout Tests', () => {
       'nav': '<nav>Navigation</nav>',
     }
 
-    const renderer = new ZzzBase()
+    const renderer = new ZzzTemplateBase()
     renderer.read = (f) => templates[f]
     useLayout(renderer)
     useIfMap(renderer)
@@ -65,7 +65,7 @@ describe('Advanced Layout Tests', () => {
         'layout': '${IFI(data.showNav, "nav", {})}${data.content}${MAP(data.items, "<span>\\${data}</span>")}',
         'nav': '<nav>Navigation</nav>',
       }
-      const renderer2 = new ZzzBase()
+      const renderer2 = new ZzzTemplateBase()
       renderer2.read = (f) => templates2[f]
       useLayout(renderer2)
       useIfMap(renderer2)
@@ -81,7 +81,7 @@ describe('Advanced Layout Tests', () => {
       'layout': '<h1>${local.pageTitle}</h1>${data.content}',
     }
 
-    const renderer = new ZzzBase()
+    const renderer = new ZzzTemplateBase()
     renderer.read = (f) => templates[f]
     useLayout(renderer)
     useLocal(renderer)
@@ -99,7 +99,7 @@ describe('Advanced Layout Tests', () => {
       'layout2': '<div class="layout2">${data.content}</div>',
     }
 
-    const renderer = new ZzzBase()
+    const renderer = new ZzzTemplateBase()
     renderer.read = (f) => templates[f]
     useLayout(renderer)
 
@@ -115,7 +115,7 @@ describe('Advanced Layout Tests', () => {
       'layout': '<main>${data.content}</main>',
     }
 
-    const renderer = new ZzzBase()
+    const renderer = new ZzzTemplateBase()
     renderer.read = (f) => templates[f]
     useLayout(renderer)
 
@@ -131,7 +131,7 @@ describe('Advanced Layout Tests', () => {
       'layout': '<h1>${data.title}</h1>${data.nav ? "<nav>Nav</nav>" : ""}${data.content}',
     }
 
-    const renderer = new ZzzBase()
+    const renderer = new ZzzTemplateBase()
     renderer.read = (f) => templates[f]
     useLayout(renderer)
 
@@ -147,7 +147,7 @@ describe('Advanced Layout Tests', () => {
       'layout': ' <main>${data.content}</main> ',
     }
 
-    const renderer = new ZzzBase()
+    const renderer = new ZzzTemplateBase()
     renderer.read = (f) => templates[f]
     useLayout(renderer)
     useContentTrim(renderer)
@@ -165,7 +165,7 @@ describe('Advanced Layout Tests', () => {
       'layout': 'Layout: ${data.layoutData} | ${data.content}',
     }
 
-    const renderer = new ZzzBase()
+    const renderer = new ZzzTemplateBase()
     renderer.read = (f) => templates[f]
     useLayout(renderer)
 
@@ -182,7 +182,7 @@ describe('Advanced Layout Tests', () => {
       'l2': 'L2-${local.x}-${local.y}-${local.z}-${data.content}',
     }
 
-    const renderer = new ZzzBase()
+    const renderer = new ZzzTemplateBase()
     renderer.read = (f) => templates[f]
     useLayout(renderer)
     useLocal(renderer)
@@ -200,7 +200,7 @@ describe('Advanced Layout Tests', () => {
       'user-info': '<span>User: ${data.name}</span>',
     }
 
-    const renderer = new ZzzBase()
+    const renderer = new ZzzTemplateBase()
     renderer.read = (f) => templates[f]
     useLayout(renderer)  // useLayout includes useInclude internally
 
@@ -216,7 +216,7 @@ describe('Advanced Layout Tests', () => {
       'layout': '<div>${data.content}</div>',
     }
 
-    const renderer = new ZzzBase()
+    const renderer = new ZzzTemplateBase()
     renderer.read = (f) => templates[f]
     useLayout(renderer)
 
@@ -237,7 +237,7 @@ describe('Advanced Layout Tests', () => {
       'layout': '<div>${data.content}</div>',
     }
 
-    const renderer = new ZzzBase()
+    const renderer = new ZzzTemplateBase()
     renderer.read = (f) => templates[f]
     useLayout(renderer)
 

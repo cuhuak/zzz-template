@@ -1,10 +1,10 @@
 import {it, describe} from 'node:test'
 import assert from 'node:assert'
-import {ZzzBase, useIfMap, useLocal} from 'zzz-template'
+import {ZzzTemplateBase, useIfMap, useLocal} from 'zzz-template'
 
 describe('TEMPLATE function', () => {
   describe('direct TEMPLATE usage', () => {
-    const renderer = new ZzzBase()
+    const renderer = new ZzzTemplateBase()
     useIfMap(renderer)
 
     it('should render template string with data', () => {
@@ -21,7 +21,7 @@ describe('TEMPLATE function', () => {
   })
 
   describe('TEMPLATE with complex strings', () => {
-    const renderer = new ZzzBase()
+    const renderer = new ZzzTemplateBase()
     useIfMap(renderer)
 
     it('should handle multiline templates', () => {
@@ -44,7 +44,7 @@ describe('TEMPLATE function', () => {
   })
 
   describe('TEMPLATE with local variables', () => {
-    const renderer = new ZzzBase()
+    const renderer = new ZzzTemplateBase()
     useIfMap(renderer)
     useLocal(renderer)
 
@@ -62,7 +62,7 @@ describe('TEMPLATE function', () => {
   })
 
   describe('TEMPLATE with MAP', () => {
-    const renderer = new ZzzBase()
+    const renderer = new ZzzTemplateBase()
     useIfMap(renderer)
 
     it('should work inside MAP', () => {
@@ -79,7 +79,7 @@ describe('TEMPLATE function', () => {
   })
 
   describe('TEMPLATE with different data types', () => {
-    const renderer = new ZzzBase()
+    const renderer = new ZzzTemplateBase()
     useIfMap(renderer)
 
     it('should handle string data', () => {
@@ -114,7 +114,7 @@ describe('TEMPLATE function', () => {
   })
 
   describe('TEMPLATE dynamic usage', () => {
-    const renderer = new ZzzBase()
+    const renderer = new ZzzTemplateBase()
     useIfMap(renderer)
 
     it('should use data from parent scope', () => {
@@ -134,7 +134,7 @@ describe('TEMPLATE function', () => {
   })
 
   describe('TEMPLATE error handling', () => {
-    const renderer = new ZzzBase()
+    const renderer = new ZzzTemplateBase()
     useIfMap(renderer)
 
     it('should handle undefined data properties', () => {
@@ -151,7 +151,7 @@ describe('TEMPLATE function', () => {
   })
 
   describe('TEMPLATE vs direct template literals', () => {
-    const renderer = new ZzzBase()
+    const renderer = new ZzzTemplateBase()
     useIfMap(renderer)
 
     it('should produce same result as inline template', () => {
@@ -167,7 +167,7 @@ describe('TEMPLATE function', () => {
   })
 
   describe('TEMPLATE with conditional expressions', () => {
-    const renderer = new ZzzBase()
+    const renderer = new ZzzTemplateBase()
     useIfMap(renderer)
 
     it('should handle ternary operators', () => {

@@ -78,9 +78,9 @@ console.log(fn({name: 'Tom'})); // > "Hello Tom"
 ```
 ``` javascript
 // file examples/02-basic/example.js
-import { ZzzFs } from 'zzz-template/fs.js'
+import { ZzzTemplateNode } from 'zzz-template/node.js'
 
-const zzz = new ZzzFs({ dir: import.meta.dirname })
+const zzz = new ZzzTemplateNode({ dir: import.meta.dirname })
 const result = zzz.render('template.html', { name: 'Jerry' })
 console.log(result)
 // OUTPUT:
@@ -441,4 +441,4 @@ Looking for JavaScript template engines? Here are some alternatives:
 - [doT](https://www.npmjs.com/package/dot) - Fast template engine
 
 ---
-Docs revision: 2025-11-24T08:05:23.013Z
+Docs revision: 2025-11-30T09:24:44.842Z

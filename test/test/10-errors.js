@@ -1,11 +1,11 @@
 import {it, describe} from 'node:test'
 import assert from 'node:assert'
-import {ZzzBase, useInclude, useLayout, useIfMap} from 'zzz-template'
-import {ZzzFs} from 'zzz-template/fs.js'
+import {ZzzTemplateBase, useInclude, useLayout, useIfMap} from 'zzz-template'
+import {ZzzTemplateNode} from 'zzz-template/node.js'
 
 describe('Error Handling', () => {
-  describe('missing template file (ZzzFs)', () => {
-    const renderer = new ZzzFs({dir: './test'})
+  describe('missing template file (ZzzTemplateNode)', () => {
+    const renderer = new ZzzTemplateNode({dir: './test'})
 
     it('should throw error when file not found', () => {
       assert.throws(
@@ -20,7 +20,7 @@ describe('Error Handling', () => {
       'main': 'Hello world'
     }
 
-    const renderer = new ZzzBase()
+    const renderer = new ZzzTemplateBase()
     renderer.read = (f) => templates[f]
 
     it('should return undefined for missing template', () => {
@@ -31,7 +31,7 @@ describe('Error Handling', () => {
   })
 
   describe('invalid template syntax', () => {
-    const renderer = new ZzzBase()
+    const renderer = new ZzzTemplateBase()
 
     it('should throw on unclosed template literal', () => {
       assert.throws(
@@ -56,7 +56,7 @@ describe('Error Handling', () => {
   })
 
   describe('undefined variables in templates', () => {
-    const renderer = new ZzzBase()
+    const renderer = new ZzzTemplateBase()
 
     it('should render undefined as string "undefined"', () => {
       const fn = renderer.compile('Hello ${data.name}')
@@ -91,7 +91,7 @@ describe('Error Handling', () => {
       'b': 'Template B ${INCLUDE("a", {})}',
     }
 
-    const renderer = new ZzzBase()
+    const renderer = new ZzzTemplateBase()
     renderer.read = (f) => templates[f]
     useInclude(renderer)
 
@@ -109,7 +109,7 @@ describe('Error Handling', () => {
       'b': '${LAYOUT("a")}Content B ${data.content}',
     }
 
-    const renderer = new ZzzBase()
+    const renderer = new ZzzTemplateBase()
     renderer.read = (f) => templates[f]
     useLayout(renderer)
 
@@ -126,7 +126,7 @@ describe('Error Handling', () => {
       'recursive': '${INCLUDE("recursive", {})}',
     }
 
-    const renderer = new ZzzBase()
+    const renderer = new ZzzTemplateBase()
     renderer.read = (f) => templates[f]
     useInclude(renderer)
 
@@ -139,7 +139,7 @@ describe('Error Handling', () => {
   })
 
   describe('invalid data types to functions', () => {
-    const renderer = new ZzzBase()
+    const renderer = new ZzzTemplateBase()
     useIfMap(renderer)
 
     it('should throw when MAP receives non-array', () => {
@@ -172,7 +172,7 @@ describe('Error Handling', () => {
       'main': '${INCLUDE("missing", {})}',
     }
 
-    const renderer = new ZzzBase()
+    const renderer = new ZzzTemplateBase()
     renderer.read = (f) => templates[f]
     useInclude(renderer)
 
@@ -187,7 +187,7 @@ describe('Error Handling', () => {
       'main': '${IFI(true, "missing", {})}',
     }
 
-    const renderer = new ZzzBase()
+    const renderer = new ZzzTemplateBase()
     renderer.read = (f) => templates[f]
     useIfMap(renderer)
 
@@ -202,7 +202,7 @@ describe('Error Handling', () => {
       'main': '${MAPI([1, 2, 3], "missing")}',
     }
 
-    const renderer = new ZzzBase()
+    const renderer = new ZzzTemplateBase()
     renderer.read = (f) => templates[f]
     useIfMap(renderer)
 
@@ -213,7 +213,7 @@ describe('Error Handling', () => {
   })
 
   describe('runtime errors in template expressions', () => {
-    const renderer = new ZzzBase()
+    const renderer = new ZzzTemplateBase()
 
     it('should throw on division by zero producing Infinity', () => {
       const fn = renderer.compile('Result: ${1 / 0}')
@@ -239,7 +239,7 @@ describe('Error Handling', () => {
   })
 
   describe('compile with invalid parameters', () => {
-    const renderer = new ZzzBase()
+    const renderer = new ZzzTemplateBase()
 
     it('should handle null template', () => {
       // null is converted to string "null" by template literal

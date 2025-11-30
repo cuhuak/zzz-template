@@ -43,7 +43,7 @@
   "files": [
     "index.js",
     "index.d.ts",
-    "fs.js",
+    "node.js",
     "fs.d.ts",
     "readme.md",
     "LICENSE"
@@ -57,10 +57,10 @@
       "import": "./index.js",
       "require": "./index.js"
     },
-    "./fs.js": {
+    "./node.js": {
       "types": "./fs.d.ts",
-      "import": "./fs.js",
-      "require": "./fs.js"
+      "import": "./node.js",
+      "require": "./node.js"
     }
   }
 }
