@@ -8,7 +8,7 @@ export class ZzzTemplateBase {
   read(f: string): string;
 }
 
-export class ZzzBrowser extends ZzzTemplateBase {
+export class ZzzTemplate extends ZzzTemplateBase {
   read(f: string): string;
 }
 

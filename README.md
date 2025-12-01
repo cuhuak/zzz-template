@@ -39,9 +39,9 @@ npm install zzz-template
 ### Compile example (see [examples/00-compile](examples/00-compile))
 ``` javascript
 // file examples/00-compile/example.js
-import {ZzzBrowser} from "zzz-template"
+import {ZzzTemplate} from "zzz-template"
 
-const zzz = new ZzzBrowser()
+const zzz = new ZzzTemplate()
 const fn = zzz.compile('Hello ${data.name}') // returns function that renders your template using data: `fn(data)`
 console.log(fn({name: 'Jerry'})); // > "Hello Jerry"
 console.log(fn({name: 'Tom'})); // > "Hello Tom"
@@ -57,9 +57,9 @@ console.log(fn({name: 'Tom'})); // > "Hello Tom"
 </script>
 
 <script type="module">
-  import { ZzzBrowser } from '/zzz-template/index.js'
+  import { ZzzTemplate } from '/zzz-template/index.js'
 
-  const zzz = new ZzzBrowser()
+  const zzz = new ZzzTemplate()
 
   const result = zzz.render('template', { name: 'world' })
 
@@ -97,9 +97,9 @@ console.log(result)
 ``` html
 <!-- file examples/03-include/page.html --> 
 <script type="module">
-  import { ZzzBrowser, useInclude } from '/zzz-template/index.js'
+  import { ZzzTemplate, useInclude } from '/zzz-template/index.js'
 
-  const zzz = new ZzzBrowser()
+  const zzz = new ZzzTemplate()
   useInclude(zzz) // 👈 enables include feature
 
   const result = zzz.render('template', { name: 'world' })
@@ -131,9 +131,9 @@ console.log(result)
 ``` html
 <!-- file examples/06-layout/layouts.html --> 
 <script type="module">
-  import { ZzzBrowser, useLayout } from '/zzz-template/index.js'
+  import { ZzzTemplate, useLayout } from '/zzz-template/index.js'
 
-  const zzz = new ZzzBrowser()
+  const zzz = new ZzzTemplate()
   useLayout(zzz) // 👈 enables layout feature
 
   const result = zzz.render('template', { name: 'world' })
@@ -195,9 +195,9 @@ See example how layout can include each other: `examples/06-layout/layouts2.html
 </script>
 
 <script type="module">
-  import { ZzzBrowser, useLayout, useLocal } from '/zzz-template/index.js'
+  import { ZzzTemplate, useLayout, useLocal } from '/zzz-template/index.js'
 
-  const zzz = new ZzzBrowser()
+  const zzz = new ZzzTemplate()
   useLayout(zzz) // 👈 enables layout feature
   useLocal(zzz) // 👈 enables local vars feature
 
@@ -218,9 +218,9 @@ See example how layout can include each other: `examples/06-layout/layouts2.html
 ``` html
 <!-- file examples/04-if/if.html --> 
 <script type="module">
-  import { ZzzBrowser, useIfMap } from '/zzz-template/index.js'
+  import { ZzzTemplate, useIfMap } from '/zzz-template/index.js'
 
-  const zzz = new ZzzBrowser()
+  const zzz = new ZzzTemplate()
   useIfMap(zzz) // 👈 enables "if/map" feature
 
   const result = zzz.render('template', { name: 'world', n: 42 })
@@ -255,9 +255,9 @@ See example how layout can include each other: `examples/06-layout/layouts2.html
 ``` html
 <!-- file examples/04-if/ifi.html --> 
 <script type="module">
-  import { ZzzBrowser, useIfMap } from '/zzz-template/index.js'
+  import { ZzzTemplate, useIfMap } from '/zzz-template/index.js'
 
-  const zzz = new ZzzBrowser()
+  const zzz = new ZzzTemplate()
   useIfMap(zzz) // 👈 enables "if/map" feature
 
   const result = zzz.render('template', { name: 'world', n: 42 })
@@ -288,9 +288,9 @@ See example how layout can include each other: `examples/06-layout/layouts2.html
 ``` html
 <!-- file examples/05-map/map.html --> 
 <script type="module">
-  import { ZzzBrowser, useIfMap } from '/zzz-template/index.js'
+  import { ZzzTemplate, useIfMap } from '/zzz-template/index.js'
 
-  const zzz = new ZzzBrowser()
+  const zzz = new ZzzTemplate()
   useIfMap(zzz) // 👈 enables "if/map" feature
 
   const pets = [{ name: 'cat', say: 'meow' }, { name: 'dog', say: 'woof' }]
@@ -328,9 +328,9 @@ ZzzTemplate already has a few built-in plugins. A plugin is just a function that
 For instance, you can inject your code into the compile function. Here is a 'trim' example:
 
 ``` javascript
-import {ZzzBrowser, useContentTrim} from "zzz-template"
+import {ZzzTemplate, useContentTrim} from "zzz-template"
 
-const zzz = new ZzzBrowser()
+const zzz = new ZzzTemplate()
 useContentTrim(zzz)
 const fn = zzz.compile('   Hello ${data.name}   ')
 // note that result is trimmed
@@ -349,9 +349,9 @@ This function pushes a code snippet to the end array that will be invoked after 
 Or you may want to introduce a new var in your templates.
 
 ``` javascript
-import {ZzzBrowser, useContentTrim} from "zzz-template"
+import {ZzzTemplate, useContentTrim} from "zzz-template"
 
-const zzz = new ZzzBrowser()
+const zzz = new ZzzTemplate()
 
 // zzz.s -- s means start (before template content compiled)
 zzz.s.push('let $$ = data;') // introduce `$$` for `data`
@@ -366,9 +366,9 @@ console.log(result); // > "Hello Tom"
 ``` html
 <!-- file examples/10-extend/escape.html --> 
 <script type="module">
-  import { ZzzBrowser, useFn } from '/zzz-template/index.js'
+  import { ZzzTemplate, useFn } from '/zzz-template/index.js'
 
-  const zzz = new ZzzBrowser()
+  const zzz = new ZzzTemplate()
 
   function escapeHtml (unsafe) {
     return unsafe
@@ -441,4 +441,4 @@ Looking for JavaScript template engines? Here are some alternatives:
 - [doT](https://www.npmjs.com/package/dot) - Fast template engine
 
 ---
-Docs revision: 2025-11-30T09:24:44.842Z
+Docs revision: 2025-12-01T07:31:03.778Z

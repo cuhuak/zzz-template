@@ -1,7 +1,7 @@
 <script type="module">
-  import { ZzzBrowser, useIfMap } from '/zzz-template/index.js'
+  import { ZzzTemplate, useIfMap } from '/zzz-template/index.js'
 
-  const zzz = new ZzzBrowser()
+  const zzz = new ZzzTemplate()
   useIfMap(zzz) // 👈 enables "if/map" feature
 
   const result = zzz.render('template', { name: 'world', n: 42 })

@@ -48,7 +48,7 @@
   </footer>
 </script>
 <script type="module">
-  import { ZzzBrowser, useLayout, useContentTrim, useLocal, useIfMap } from '/zzz-template/index.js'
+  import { ZzzTemplate, useLayout, useContentTrim, useLocal, useIfMap } from '/zzz-template/index.js'
 
   const data = {
     name: 'world',
@@ -56,7 +56,7 @@
     showSay: true,
     me: { name: 'Bob' }
   }
-  const renderer = new ZzzBrowser()
+  const renderer = new ZzzTemplate()
   useContentTrim(renderer)
   useLayout(renderer)
   useLocal(renderer)

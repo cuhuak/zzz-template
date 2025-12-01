@@ -1,7 +1,7 @@
 <script type="module">
-  import { ZzzBrowser, useInclude } from '/zzz-template/index.js'
+  import { ZzzTemplate, useInclude } from '/zzz-template/index.js'
 
-  const zzz = new ZzzBrowser()
+  const zzz = new ZzzTemplate()
   useInclude(zzz) // 👈 enables include feature
 
   const result = zzz.render('template', { name: 'world' })

@@ -48,5 +48,5 @@ export function useIfMap(zzz, aliases = true) {
   useFn(zzz, function map_include(arr, file) {return arr.map(x => {return this.include(file, x)}).join('')}, aliases && 'MAPI')
 }
 
-// @deprecated
+// @deprecated ZzzBrowser, use ZzzTemplate class instead
 export const ZzzBrowser = ZzzTemplate

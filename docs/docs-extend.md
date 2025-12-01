@@ -3,9 +3,9 @@ ZzzTemplate already has a few built-in plugins. A plugin is just a function that
 For instance, you can inject your code into the compile function. Here is a 'trim' example:
 
 ``` javascript
-import {ZzzBrowser, useContentTrim} from "zzz-template"
+import {ZzzTemplate, useContentTrim} from "zzz-template"
 
-const zzz = new ZzzBrowser()
+const zzz = new ZzzTemplate()
 useContentTrim(zzz)
 const fn = zzz.compile('   Hello ${data.name}   ')
 // note that result is trimmed
@@ -24,9 +24,9 @@ This function pushes a code snippet to the end array that will be invoked after 
 Or you may want to introduce a new var in your templates.
 
 ``` javascript
-import {ZzzBrowser, useContentTrim} from "zzz-template"
+import {ZzzTemplate, useContentTrim} from "zzz-template"
 
-const zzz = new ZzzBrowser()
+const zzz = new ZzzTemplate()
 
 // zzz.s -- s means start (before template content compiled)
 zzz.s.push('let $$$ = data;') // introduce `$$$` for `data`

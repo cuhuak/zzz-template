@@ -1,9 +1,9 @@
 import {it, describe} from 'node:test'
 import assert from 'node:assert'
 import {JSDOM} from 'jsdom'
-import {ZzzBrowser, useContentTrim, useInclude, useIfMap} from 'zzz-template'
+import {ZzzTemplate, useContentTrim, useInclude, useIfMap} from 'zzz-template'
 
-describe('ZzzBrowser with JSDOM', () => {
+describe('ZzzTemplate with JSDOM', () => {
   // Helper to setup and cleanup JSDOM environment
   function withDOM(testFn) {
     return () => {
@@ -30,11 +30,11 @@ describe('ZzzBrowser with JSDOM', () => {
     }
   }
 
-  describe('basic ZzzBrowser functionality', () => {
+  describe('basic ZzzTemplate functionality', () => {
     it('should read template from DOM element by id', withDOM(() => {
       document.body.innerHTML = '<script id="tpl" type="text/plain">Hello ${data.name}!</script>'
 
-      const renderer = new ZzzBrowser()
+      const renderer = new ZzzTemplate()
       const result = renderer.render('tpl', {name: 'World'})
 
       assert.strictEqual(result, 'Hello World!')
@@ -46,7 +46,7 @@ describe('ZzzBrowser with JSDOM', () => {
       elem.innerText = 'Value: ${data.val}'
       document.body.appendChild(elem)
 
-      const zzz = new ZzzBrowser()
+      const zzz = new ZzzTemplate()
       const result = zzz.render('test', {val: 42})
 
       assert.strictEqual(result, 'Value: 42')
@@ -55,7 +55,7 @@ describe('ZzzBrowser with JSDOM', () => {
     it('should read from span element', withDOM(() => {
       document.body.innerHTML = '<span id="msg">Message: ${data.text}</span>'
 
-      const zzz = new ZzzBrowser()
+      const zzz = new ZzzTemplate()
       const result = zzz.render('msg', {text: 'hello'})
 
       assert.strictEqual(result, 'Message: hello')
@@ -69,7 +69,7 @@ describe('ZzzBrowser with JSDOM', () => {
         <script id="footer" type="text/plain"><footer>\${data.year}</footer></script>
       `
 
-      const zzz = new ZzzBrowser()
+      const zzz = new ZzzTemplate()
 
       assert.strictEqual(zzz.render('header', {title: 'Test'}), '<h1>Test</h1>')
       assert.strictEqual(zzz.render('footer', {year: 2025}), '<footer>2025</footer>')
@@ -78,7 +78,7 @@ describe('ZzzBrowser with JSDOM', () => {
     it('should handle rendering same template multiple times', withDOM(() => {
       document.body.innerHTML = '<div id="tpl">Count: ${data.n}</div>'
 
-      const zzz = new ZzzBrowser()
+      const zzz = new ZzzTemplate()
 
       assert.strictEqual(zzz.render('tpl', {n: 1}), 'Count: 1')
       assert.strictEqual(zzz.render('tpl', {n: 2}), 'Count: 2')
@@ -90,7 +90,7 @@ describe('ZzzBrowser with JSDOM', () => {
     it('should work with useContentTrim', withDOM(() => {
       document.body.innerHTML = '<script id="tpl" type="text/plain">  Hello ${data.name}!  </script>'
 
-      const zzz = new ZzzBrowser()
+      const zzz = new ZzzTemplate()
       useContentTrim(zzz)
       const result = zzz.render('tpl', {name: 'World'})
 
@@ -103,7 +103,7 @@ describe('ZzzBrowser with JSDOM', () => {
         <script id="partial" type="text/plain">Name: \${data.name}</script>
       `
 
-      const zzz = new ZzzBrowser()
+      const zzz = new ZzzTemplate()
       useInclude(zzz)
       const result = zzz.render('main', {name: 'Alice'})
 
@@ -115,7 +115,7 @@ describe('ZzzBrowser with JSDOM', () => {
         <script id="conditional" type="text/plain">\${IF(data.show, "visible", data)}</script>
       `
 
-      const zzz = new ZzzBrowser()
+      const zzz = new ZzzTemplate()
       useIfMap(zzz)
 
       assert.strictEqual(zzz.render('conditional', {show: true}), 'visible')
@@ -125,7 +125,7 @@ describe('ZzzBrowser with JSDOM', () => {
     it('should work with useIfMap MAP function', withDOM(() => {
       document.body.innerHTML = '<script id="list" type="text/plain">${MAP(data.items, "<li>\\${data}</li>")}</script>'
 
-      const zzz = new ZzzBrowser()
+      const zzz = new ZzzTemplate()
       useIfMap(zzz)
       const result = zzz.render('list', {items: [1, 2, 3]})
 
@@ -135,7 +135,7 @@ describe('ZzzBrowser with JSDOM', () => {
 
   describe('error handling', () => {
     it('should throw TypeError when element not found', withDOM(() => {
-      const zzz = new ZzzBrowser()
+      const zzz = new ZzzTemplate()
 
       assert.throws(() => {
         zzz.render('nonexistent', {})
@@ -145,7 +145,7 @@ describe('ZzzBrowser with JSDOM', () => {
     it('should handle element with empty content', withDOM(() => {
       document.body.innerHTML = '<div id="empty"></div>'
 
-      const zzz = new ZzzBrowser()
+      const zzz = new ZzzTemplate()
       const result = zzz.render('empty', {})
 
       assert.strictEqual(result, '')
@@ -156,7 +156,7 @@ describe('ZzzBrowser with JSDOM', () => {
     it('should handle string data', withDOM(() => {
       document.body.innerHTML = '<div id="str">Value: ${data}</div>'
 
-      const zzz = new ZzzBrowser()
+      const zzz = new ZzzTemplate()
       const result = zzz.render('str', 'test')
 
       assert.strictEqual(result, 'Value: test')
@@ -165,7 +165,7 @@ describe('ZzzBrowser with JSDOM', () => {
     it('should handle number data', withDOM(() => {
       document.body.innerHTML = '<div id="num">Number: ${data}</div>'
 
-      const zzz = new ZzzBrowser()
+      const zzz = new ZzzTemplate()
       const result = zzz.render('num', 42)
 
       assert.strictEqual(result, 'Number: 42')
@@ -174,7 +174,7 @@ describe('ZzzBrowser with JSDOM', () => {
     it('should handle boolean data', withDOM(() => {
       document.body.innerHTML = '<div id="bool">Bool: ${data}</div>'
 
-      const zzz = new ZzzBrowser()
+      const zzz = new ZzzTemplate()
       const result = zzz.render('bool', true)
 
       assert.strictEqual(result, 'Bool: true')
@@ -183,7 +183,7 @@ describe('ZzzBrowser with JSDOM', () => {
     it('should handle object data', withDOM(() => {
       document.body.innerHTML = '<div id="obj">${data.a} - ${data.b}</div>'
 
-      const zzz = new ZzzBrowser()
+      const zzz = new ZzzTemplate()
       const result = zzz.render('obj', {a: 1, b: 2})
 
       assert.strictEqual(result, '1 - 2')
@@ -192,7 +192,7 @@ describe('ZzzBrowser with JSDOM', () => {
     it('should handle array data with join', withDOM(() => {
       document.body.innerHTML = '<div id="arr">${data.join(", ")}</div>'
 
-      const zzz = new ZzzBrowser()
+      const zzz = new ZzzTemplate()
       const result = zzz.render('arr', ['A', 'B', 'C'])
 
       assert.strictEqual(result, 'A, B, C')
@@ -206,7 +206,7 @@ describe('ZzzBrowser with JSDOM', () => {
         <script id="header" type="text/plain"><h1>\${data.title}</h1></script>
       `
 
-      const zzz = new ZzzBrowser()
+      const zzz = new ZzzTemplate()
       useInclude(zzz)
       const result = zzz.render('page', {title: 'Hello', content: 'World'})
 
@@ -217,7 +217,7 @@ describe('ZzzBrowser with JSDOM', () => {
     it('should handle conditional rendering with complex data', withDOM(() => {
       document.body.innerHTML = '<script id="user" type="text/plain">${IF(data.active, "User: \\${data.name}", data)}</script>'
 
-      const zzz = new ZzzBrowser()
+      const zzz = new ZzzTemplate()
       useIfMap(zzz)
 
       const result1 = zzz.render('user', {name: 'Alice', active: true})
@@ -230,7 +230,7 @@ describe('ZzzBrowser with JSDOM', () => {
     it('should handle mapping over objects', withDOM(() => {
       document.body.innerHTML = '<script id="cards" type="text/plain">${MAP(data.users, "<div>\\${data.name}: \\${data.age}</div>")}</script>'
 
-      const zzz = new ZzzBrowser()
+      const zzz = new ZzzTemplate()
       useIfMap(zzz)
       const result = zzz.render('cards', {
         users: [
@@ -248,7 +248,7 @@ describe('ZzzBrowser with JSDOM', () => {
     it('should use compile directly', withDOM(() => {
       document.body.innerHTML = '<div id="tpl">Compiled: ${data.val}</div>'
 
-      const zzz = new ZzzBrowser()
+      const zzz = new ZzzTemplate()
       const template = zzz.read('tpl')
       const fn = zzz.compile(template)
       const result = fn({val: 'test'})
@@ -259,7 +259,7 @@ describe('ZzzBrowser with JSDOM', () => {
     it('should reuse compiled function', withDOM(() => {
       document.body.innerHTML = '<div id="tpl">${data.x} + ${data.y}</div>'
 
-      const zzz = new ZzzBrowser()
+      const zzz = new ZzzTemplate()
       const fn = zzz.compile(zzz.read('tpl'))
 
       assert.strictEqual(fn({x: 1, y: 2}), '1 + 2')
@@ -272,7 +272,7 @@ describe('ZzzBrowser with JSDOM', () => {
     it('should handle quotes in template', withDOM(() => {
       document.body.innerHTML = '<div id="quotes">He said "${data.msg}"</div>'
 
-      const zzz = new ZzzBrowser()
+      const zzz = new ZzzTemplate()
       const result = zzz.render('quotes', {msg: 'hello'})
 
       assert.strictEqual(result, 'He said "hello"')
@@ -281,7 +281,7 @@ describe('ZzzBrowser with JSDOM', () => {
     it('should handle unicode in template', withDOM(() => {
       document.body.innerHTML = '<div id="unicode">Unicode: ${data.emoji} 中文</div>'
 
-      const zzz = new ZzzBrowser()
+      const zzz = new ZzzTemplate()
       const result = zzz.render('unicode', {emoji: '🎉'})
 
       assert.strictEqual(result, 'Unicode: 🎉 中文')
@@ -293,7 +293,7 @@ describe('ZzzBrowser with JSDOM', () => {
       elem.innerText = 'Line 1\n${data.text}\nLine 3'
       document.body.appendChild(elem)
 
-      const zzz = new ZzzBrowser()
+      const zzz = new ZzzTemplate()
       const result = zzz.render('multiline', {text: 'Line 2'})
 
       assert.ok(result.includes('Line 1'))
