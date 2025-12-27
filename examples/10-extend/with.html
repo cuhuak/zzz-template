@@ -1,0 +1,25 @@
+<script type="module">
+  import { ZzzTemplate, useFn } from '/zzz-template/index.js'
+
+  const zzz = new ZzzTemplate()
+  zzz.s.unshift('with(data){')
+  zzz.e.push('}')
+
+  const result = zzz.render('template', { name: 'Tom', n: 42 })
+
+  console.log(result)
+  document.body.innerHTML = result
+</script>
+
+<script id="template" type="plain/text">
+  <p>
+    Hello ${name}!
+    <br>
+    Random number: ${n}
+  </p>
+  <pre>
+// data:
+${JSON.stringify(data, null, 2)}
+  </pre>
+</script>
+
