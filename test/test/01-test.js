@@ -190,14 +190,14 @@ describe('useLocal', () => {
   useLocal(renderer)
 
   describe('set', () => {
-    renderer.$.set('k0', () => {});
-    renderer.$.set('k1', null);
-    renderer.$.set('k2', undefined);
-    renderer.$.set('k3', 'string');
-    renderer.$.set('k4', 42);
-    renderer.$.set('k5', true);
-    renderer.$.set('k6', false);
-    renderer.$.set('k0', 'aaa');
+    renderer.$.SET('k0', () => {});
+    renderer.$.SET('k1', null);
+    renderer.$.SET('k2', undefined);
+    renderer.$.SET('k3', 'string');
+    renderer.$.SET('k4', 42);
+    renderer.$.SET('k5', true);
+    renderer.$.SET('k6', false);
+    renderer.$.SET('k0', 'aaa');
 
     it('should k0 is "aaa"', () => {
       assert.strictEqual(renderer.$.local.k0, 'aaa')
@@ -223,17 +223,17 @@ describe('useLocal', () => {
   })
 
   describe('seta (various values)', () => {
-    renderer.$.seta('a1', null);
-    renderer.$.seta('a1', undefined);
+    renderer.$.SETA('a1', null);
+    renderer.$.SETA('a1', undefined);
 
     it('should a1 is [null, undefined]', () => {
       assert.deepEqual(renderer.$.local.a1, [null, undefined])
     })
 
-    renderer.$.seta('a2', 0, [1, 2, 3], 4, 5, 'six');
-    renderer.$.seta('a2', [true, false]);
-    renderer.$.seta('a2', 'abc');
-    renderer.$.seta('a2', 42);
+    renderer.$.SETA('a2', 0, [1, 2, 3], 4, 5, 'six');
+    renderer.$.SETA('a2', [true, false]);
+    renderer.$.SETA('a2', 'abc');
+    renderer.$.SETA('a2', 42);
 
     it('should a2 is array', () => {
       assert.deepEqual(renderer.$.local.a2, [0, 1, 2, 3, 4, 5, 'six', true, false, 'abc', 42])
@@ -241,21 +241,21 @@ describe('useLocal', () => {
   })
 
   describe('set and seta (works together)', () => {
-    renderer.$.set('o1', 'aaa');
-    renderer.$.seta('o1', ['bbb']);
+    renderer.$.SET('o1', 'aaa');
+    renderer.$.SETA('o1', ['bbb']);
 
     it('should o1 is ["aaa", "bbb"]', () => {
       assert.deepEqual(renderer.$.local.o1, ["aaa", "bbb"])
     })
 
-    renderer.$.set('o2', ['aaa']);
-    renderer.$.seta('o2', ['bbb']);
+    renderer.$.SET('o2', ['aaa']);
+    renderer.$.SETA('o2', ['bbb']);
     it('should o2 is ["aaa", "bbb"]', () => {
       assert.deepEqual(renderer.$.local.o2, ["aaa", "bbb"])
     })
 
-    renderer.$.seta('o3', ['bbb']);
-    renderer.$.set('o3', 'aaa');
+    renderer.$.SETA('o3', ['bbb']);
+    renderer.$.SET('o3', 'aaa');
     it('should o3 is "aaa"', () => {
       assert.deepEqual(renderer.$.local.o3, "aaa")
     })

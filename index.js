@@ -19,33 +19,33 @@ export class ZzzTemplate extends ZzzTemplateBase {
   }
 }
 export function useFn(zzz, fn, alias) {
-  zzz.$[fn.name] = fn
-  if (alias) zzz.s.push(`let ${alias} = this.${fn.name}.bind(this);`)
+  zzz.$[alias] = fn
+  zzz.s.push(`let ${alias} = this.${alias}.bind(this);`)
 }
 export function useContentTrim(zzz) {
   zzz.e.push('content = content.trim();')
 }
-export function useInclude(zzz, alias = 'INCLUDE') {
-  useFn(zzz, function include(file, data) {return zzz.compile(zzz.read(file), this.local)(data)}, alias)
+export function useInclude(zzz) {
+  useFn(zzz, function (file, data) {return zzz.compile(zzz.read(file), this.local)(data)}, 'INCLUDE')
 }
-export function useLayout(zzz, alias = 'LAYOUT') {
-  zzz.$['include'] || useInclude(zzz)
-  zzz.e.push('if(this._layout)return this.include(this._layout.t,{...this._layout.d,content});')
-  useFn(zzz, function layout(t, d) {this._layout={t,d};return ''}, alias)
+export function useLayout(zzz) {
+  zzz.$['INCLUDE'] || useInclude(zzz)
+  zzz.e.push('if(this._layout)return this.INCLUDE(this._layout.t,{...this._layout.d,content});')
+  useFn(zzz, function (t, d) {this._layout={t,d};return ''}, 'LAYOUT')
 }
-export function useLocal(zzz, aliasSet = 'SET', aliasSeta = 'SETA') {
+export function useLocal(zzz) {
   zzz.s.push('let local = this.local;')
   zzz.$.local = {}
-  useFn(zzz, function set(key, values) {this.local[key] = values;return ''}, aliasSet)
-  useFn(zzz, function seta(key, ...values) {this.local[key] = [(this.local[key] ?? []), ...values].flat();return ''}, aliasSeta)
+  useFn(zzz, function (key, values) {this.local[key] = values;return ''}, 'SET')
+  useFn(zzz, function (key, ...values) {this.local[key] = [(this.local[key] ?? []), ...values].flat();return ''}, 'SETA')
 }
-export function useIfMap(zzz, aliases = true) {
-  zzz.$['include'] || useInclude(zzz)
-  useFn(zzz, function template(str, data) {return zzz.compile(str, this.local)(data)}, aliases && 'TEMPLATE')
-  useFn(zzz, function if_template(cond, str, data) {return cond ? zzz.compile(str, this.local)(data) : ''}, aliases && 'IF')
-  useFn(zzz, function if_include(cond, file, data) {return cond ? this.include(file, data) : ''}, aliases && 'IFI')
-  useFn(zzz, function map_template(arr, str) {return arr.map(x => {return zzz.compile(str, this.local)(x)}).join('')}, aliases && 'MAP')
-  useFn(zzz, function map_include(arr, file) {return arr.map(x => {return this.include(file, x)}).join('')}, aliases && 'MAPI')
+export function useIfMap(zzz) {
+zzz.$['INCLUDE'] || useInclude(zzz)
+  useFn(zzz, function (str, data) {return zzz.compile(str, this.local)(data)}, 'TEMPLATE')
+  useFn(zzz, function (cond, str, data) {return cond ? zzz.compile(str, this.local)(data) : ''}, 'IF')
+  useFn(zzz, function (cond, file, data) {return cond ? this.INCLUDE(file, data) : ''}, 'IFI')
+  useFn(zzz, function (arr, str) {return arr.map(x => {return zzz.compile(str, this.local)(x)}).join('')}, 'MAP')
+  useFn(zzz, function (arr, file) {return arr.map(x => {return this.INCLUDE(file, x)}).join('')}, 'MAPI')
 }
 
 // @deprecated ZzzBrowser, use ZzzTemplate class instead

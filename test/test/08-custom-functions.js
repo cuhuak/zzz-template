@@ -19,8 +19,8 @@ describe('useFn - Custom Functions', () => {
     })
 
     it('should access function via this.$', () => {
-      assert.strictEqual(typeof renderer.$.greet, 'function')
-      assert.strictEqual(renderer.$.greet('Test'), 'Hello, Test!')
+      assert.strictEqual(typeof renderer.$.GREET, 'function')
+      assert.strictEqual(renderer.$.GREET('Test'), 'Hello, Test!')
     })
   })
 
@@ -43,27 +43,6 @@ describe('useFn - Custom Functions', () => {
       const fn = renderer.compile('${UP(data.text)}')
       const result = fn({text: 'world'})
       assert.strictEqual(result, 'WORLD')
-    })
-  })
-
-  describe('custom function without alias', () => {
-    const renderer = new ZzzTemplateBase()
-
-    function reverse(str) {
-      return str.split('').reverse().join('')
-    }
-
-    useFn(renderer, reverse)
-
-    it('should register function without alias', () => {
-      assert.strictEqual(typeof renderer.$.reverse, 'function')
-      assert.strictEqual(renderer.$.reverse('hello'), 'olleh')
-    })
-
-    it('should not create alias in template context', () => {
-      const fn = renderer.compile('${this.reverse("test")}')
-      const result = fn({})
-      assert.strictEqual(result, 'tset')
     })
   })
 

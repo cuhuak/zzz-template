@@ -90,22 +90,6 @@ describe('useInclude', () => {
     })
   })
 
-  describe('INCLUDE with custom alias', () => {
-    const templates = {
-      'main': '${PARTIAL("greeting", {name: "world"})}',
-      'greeting': 'Hello ${data.name}!',
-    }
-
-    const renderer = new ZzzTemplateBase()
-    renderer.read = (f) => templates[f]
-    useInclude(renderer, 'PARTIAL')
-
-    it('should work with custom alias', () => {
-      const result = renderer.render('main', {})
-      assert.strictEqual(result, 'Hello world!')
-    })
-  })
-
   describe('multiple includes in template', () => {
     const templates = {
       'main': '${INCLUDE("header", {title: "My Page"})} ${INCLUDE("content", {text: "Body"})} ${INCLUDE("footer", {})}',
