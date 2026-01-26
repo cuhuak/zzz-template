@@ -12,9 +12,9 @@ export class ZzzTemplate extends ZzzTemplateBase {
   read(f: string): string;
 }
 
-export function useFn(zzz: ZzzTemplateBase, fn: Function, alias?: string | false): void;
+export function useFn(zzz: ZzzTemplateBase, fn: Function, alias: string): void;
 export function useContentTrim(zzz: ZzzTemplateBase): void;
-export function useInclude(zzz: ZzzTemplateBase, alias?: string): void;
-export function useLayout(zzz: ZzzTemplateBase, alias?: string): void;
-export function useLocal(zzz: ZzzTemplateBase, aliasSet?: string, aliasSeta?: string): void;
-export function useIfMap(zzz: ZzzTemplateBase, aliases?: boolean): void;
+export function useInclude(zzz: ZzzTemplateBase): void;
+export function useLayout(zzz: ZzzTemplateBase): void;
+export function useLocal(zzz: ZzzTemplateBase): void;
+export function useIfMap(zzz: ZzzTemplateBase): void;
