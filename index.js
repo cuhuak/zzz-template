@@ -30,7 +30,7 @@ export function useInclude(zzz) {
 }
 export function useLayout(zzz) {
   zzz.$['INCLUDE'] || useInclude(zzz)
-  zzz.e.push('if(this._layout)return this.INCLUDE(this._layout.t,{...this._layout.d,content});')
+  zzz.e.push('if(this._layout)return INCLUDE(this._layout.t,{...this._layout.d,content});')
   useFn(zzz, function (t, d) {this._layout={t,d};return ''}, 'LAYOUT')
 }
 export function useLocal(zzz) {
