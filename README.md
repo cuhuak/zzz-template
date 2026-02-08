@@ -89,6 +89,88 @@ console.log(result)
 // </p>
 ```
 
+### All features in one example (see [examples/99-all-features](examples/99-all-features))
+``` html
+<!-- file examples/99-all-features/all.html --> 
+<script type="module">
+  import { ZzzTemplate, useLayout, useLocal, useIfMap, useFn } from '/zzz-template/index.js'
+
+  const zzz = new ZzzTemplate()
+
+  useLayout(zzz) // LAYOUT, INCLUDE
+  useLocal(zzz)  // SET, SETA, local
+  useIfMap(zzz)  // IF, IFI, MAP, MAPI, TEMPLATE
+  useFn(zzz, str => str.replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;'), 'ESCAPE') // custom ESCAPE function
+
+  // Render
+  const result = zzz.render('page', {
+    title: 'All Features Demo',
+    user: { name: 'Alice', role: 'admin' },
+    pets: [
+      { name: 'Cat', say: 'meow' },
+      { name: 'Dog', say: 'woof' }
+    ],
+    html: '<b>bold</b>'
+  })
+
+  document.body.innerHTML = result
+</script>
+
+<!-- Main page template -->
+<script id="page" type="plain/text">
+  ${LAYOUT('layout', {title: data.title})}
+  ${SET('year', 2024)}
+
+  <h2>Hello ${data.user.name}!</h2>
+
+  <!-- IF: conditional inline template -->
+  ${IF(data.user.role === 'admin', '<p>You have admin access.</p>')}
+
+  <!-- IFI: conditional include template -->
+  ${IFI(data.user.role === 'admin', 'admin-badge', data.user)}
+
+  <!-- Custom function: escape HTML -->
+  <p>Escaped: ${ESCAPE(data.html)}</p>
+
+  <!-- MAP: loop with inline template -->
+  <ul>
+    ${MAP(data.pets, '<li>${data.name} says ${data.say}</li>')}
+  </ul>
+
+  <!-- MAPI: loop with include template -->
+  <ul>
+    ${MAPI(data.pets, 'pet')}
+  </ul>
+
+  <!-- INCLUDE: partial template -->
+  ${INCLUDE('footer', {text: 'Thanks for visiting!'})}
+</script>
+
+<!-- Layout template -->
+<script id="layout" type="plain/text">
+  <html>
+  <head><title>${data.title}</title></head>
+  <body>
+    <header>${data.title} - ${local.year}</header>
+    ${data.content}
+  </body>
+  </html>
+</script>
+
+<!-- Partial templates -->
+<script id="footer" type="plain/text">
+  <footer>${data.text}</footer>
+</script>
+
+<script id="admin-badge" type="plain/text">
+  <span style="color:red">[Admin: ${data.name}]</span>
+</script>
+
+<script id="pet" type="plain/text">
+  <li>${data.name} says "${data.say}"</li>
+</script>
+```
+
 ## Include (partial)
 * `useInclude(zzz)` to enable include feature
 * `${INCLUDE('partial', {name: 'universe'})}` to include `partial` template
@@ -441,4 +523,4 @@ Looking for JavaScript template engines? Here are some alternatives:
 - [doT](https://www.npmjs.com/package/dot) - Fast template engine
 
 ---
-Docs revision: 2025-12-01T07:31:03.778Z
+Docs revision: 2026-02-08T08:22:40.884Z
