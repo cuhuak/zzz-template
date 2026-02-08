@@ -16,7 +16,7 @@ export class ZzzDocs extends ZzzTemplateBase {
         const dir = parsed.dir
         const type = parsed.ext.slice(1)
         let content = readFileSync(join(this.dir, '..', file), 'utf8').trim()
-        return this.include(`_example.md`, { content, name, file, type, dir })
+        return this.INCLUDE(`_example.md`, { content, name, file, type, dir })
       },
       'EXAMPLE'
     )
