@@ -18,7 +18,7 @@ function useContentTrim(zzz) {
   zzz.e.push('content = content.trim();')
 }
 ```
-This function pushes a code snippet to the end array that will be invoked after the template content is compiled. 
+This function pushes a code snippet to the end (`e`) array that will be invoked after the template content is compiled. 
 
 
 Or you may want to introduce a new var in your templates.
@@ -38,3 +38,5 @@ console.log(result); // > "Hello Tom"
 ```
 
 $${EXAMPLE('Example that introduces `ESCAPE` function that escapes string', 'examples/10-extend/escape.html')}
+
+$${EXAMPLE('Example using `with` statement to avoid `data.` prefix', 'examples/10-extend/with.html')}

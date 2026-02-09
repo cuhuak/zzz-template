@@ -6,6 +6,6 @@
     "zzz-template": "file://.."
   },
   "scripts": {
-    "build": "node build.js"
+    "build": "node docs-build.js"
   }
 }

@@ -2,6 +2,7 @@
 <script type="module">
   import { ZzzTemplate, useLayout } from '/zzz-template/index.js'
 
+  // wraps template in with(data){...} so you can use ${name} instead of ${data.name}
   function useWith(zzz) {
     zzz.s.unshift('with(data){')
     zzz.e.push('return content}')

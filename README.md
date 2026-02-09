@@ -6,17 +6,8 @@
 [![npm bundle size](https://img.shields.io/bundlephobia/minzip/zzz-template)](https://bundlephobia.com/package/zzz-template)
 [![license](https://img.shields.io/npm/l/zzz-template.svg)](https://github.com/cuhuak/zzz-template/blob/main/LICENSE)
 
-**zzz-template** is an ultra-lightweight JavaScript template engine that leverages native template literals for maximum performance. A fast, hackable alternative to EJS, Handlebars, and Mustache that works in both Node.js and browsers.
-
-## Why zzz-template?
-
-| Feature | zzz-template | EJS | Handlebars |
-|---------|-------------|-----|------------|
-| Size (min+gzip) | ~500 bytes | ~6KB | ~17KB |
-| Dependencies | 0 | 1 | 0 |
-| Performance | 24M ops/sec | 247K ops/sec | - |
-| Browser + Node.js | Yes | Yes | Yes |
-| Template Literals | Native | No | No |
+**zzz-template** is an ultra-lightweight JavaScript template engine that leverages native template literals for maximum performance. 
+A fast, hackable alternative to EJS, Handlebars, and Mustache that works in both Node.js and browsers.
 
 ## Features
 
@@ -26,7 +17,7 @@
 - **Local variables**: `${SET('title', 'Hello world')}`, then use it in template: `${local.title}`
 - **Blazing fast**: Matches vanilla JavaScript performance (24M ops/sec)
 - **Zero dependencies**: No bloat, no supply chain risk
-- **Tiny footprint**: ~50 lines of code, ~500 bytes minified + gzipped
+- **Tiny footprint**: ~50 lines of code, ~600 bytes minified + gzipped
 - **Hackable**: Easy to extend with plugins
 - **Isomorphic**: Works on server (Node.js) and browser
 
@@ -425,7 +416,7 @@ function useContentTrim(zzz) {
   zzz.e.push('content = content.trim();')
 }
 ```
-This function pushes a code snippet to the end array that will be invoked after the template content is compiled. 
+This function pushes a code snippet to the end (`e`) array that will be invoked after the template content is compiled. 
 
 
 Or you may want to introduce a new var in your templates.
@@ -477,20 +468,54 @@ console.log(result); // > "Hello Tom"
 </script>
 ```
 
+### Example using `with` statement to avoid `data.` prefix (see [examples/10-extend](examples/10-extend))
+``` html
+<!-- file examples/10-extend/with.html --> 
+<!-- useWith: use ${name} instead of ${data.name} -->
+<script type="module">
+  import { ZzzTemplate, useLayout } from '/zzz-template/index.js'
+
+  // wraps template in with(data){...} so you can use ${name} instead of ${data.name}
+  function useWith(zzz) {
+    zzz.s.unshift('with(data){')
+    zzz.e.push('return content}')
+  }
+
+  const zzz = new ZzzTemplate()
+  useLayout(zzz)
+  useWith(zzz) // MUST BE LAST
+
+  const result = zzz.render('page', { title: 'My Page', name: 'Jerry' })
+
+  document.body.innerHTML = result
+</script>
+
+<script id="page" type="plain/text">
+  ${LAYOUT('layout', {title})}
+  <p>Hello ${name}!</p>
+</script>
+
+<script id="layout" type="plain/text">
+  <h1>${title}</h1>
+  ${content}
+</script>
+```
+
 ## Fast
 
 Fastest JS engine ever :) That is true, see the benchmark results (ran on the author's old Intel i7):
 
 ```
 --------- Benchmark Render ---------
-vanilla render x 24,478,910 ops/sec ±1.23% (91 runs sampled)
-zzz render x 24,256,470 ops/sec ±1.25% (90 runs sampled)
-literal render x 16,843,920 ops/sec ±1.63% (89 runs sampled)
-zup render x 2,738,409 ops/sec ±1.43% (91 runs sampled)
-ejs render x 247,632 ops/sec ±2.10% (91 runs sampled)
-dot render x 1,096,741 ops/sec ±0.58% (93 runs sampled)
-edge render x 8,037 ops/sec ±1.80% (90 runs sampled)
-Fastest is vanilla render, zzz render
+vanilla render x 25,887,906 ops/sec ±1.96% (90 runs sampled)
+zzz render x 26,094,676 ops/sec ±2.12% (89 runs sampled)
+literal render x 18,892,337 ops/sec ±1.50% (90 runs sampled)
+zup render x 3,288,075 ops/sec ±1.15% (92 runs sampled)
+ejs render x 272,557 ops/sec ±1.12% (93 runs sampled)
+dot render x 1,121,797 ops/sec ±1.48% (88 runs sampled)
+edge render x 8,030 ops/sec ±1.99% (87 runs sampled)
+handlebars render x 146,572 ops/sec ±1.29% (92 runs sampled)
+Fastest is zzz render, vanilla render
 ```
 
 Try to run benchmarks
@@ -511,6 +536,16 @@ And if you do, please make sure you:
 - provide a secure `zzz.read` function that reads files from a specified directory, not `../../../secret.passwords`
 - escape all user input to prevent XSS attacks
 
+## Why zzz-template?
+
+| Feature | zzz-template | EJS | Handlebars | doT | zup |
+|---------|--------------|-----|------------|-----|-----|
+| Size (min+gzip) | ~600 bytes | ~6KB | ~17KB | ~2KB | ~1KB |
+| Dependencies | 0 | 1 | 0 | 0 | 0 |
+| Performance | 26M ops/sec | 273K ops/sec | 147K ops/sec | 1.1M ops/sec | 3.3M ops/sec |
+| Browser + Node.js | Yes | Yes | Yes | Yes | Yes |
+| Template Literals | Native | No | No | No | No |
+
 ## License
 MIT
 
@@ -523,4 +558,4 @@ Looking for JavaScript template engines? Here are some alternatives:
 - [doT](https://www.npmjs.com/package/dot) - Fast template engine
 
 ---
-Docs revision: 2026-02-08T08:22:40.884Z
+Docs revision: 2026-02-09T09:00:36.891Z
