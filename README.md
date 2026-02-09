@@ -546,6 +546,16 @@ And if you do, please make sure you:
 | Browser + Node.js | Yes | Yes | Yes | Yes | Yes |
 | Template Literals | Native | No | No | No | No |
 
+## Changelog
+
+### 2.0.0
+
+- **Breaking**: `useFn` simplified - now accepts `(zzz, fn, name)` and registers function by ALIAS (not fn.name)
+- **Breaking**: `useInclude`, `useLocal`, `useIfMap` now use built-in aliases (not customizable)
+- **Deprecated**: `ZzzBrowser` - use `ZzzTemplate` instead
+- **Deprecated**: `ZzzFs` - use `ZzzTemplateNode` instead
+- Added `with` statement example for cleaner template syntax
+
 ## License
 MIT
 
@@ -558,4 +568,4 @@ Looking for JavaScript template engines? Here are some alternatives:
 - [doT](https://www.npmjs.com/package/dot) - Fast template engine
 
 ---
-Docs revision: 2026-02-09T09:00:36.891Z
+Docs revision: 2026-02-09T09:14:32.390Z

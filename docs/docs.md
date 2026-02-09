@@ -29,6 +29,8 @@ $${INCLUDE('docs-security.md')}
 
 $${INCLUDE('docs-why.md')}
 
+$${INCLUDE('docs-changelog.md')}
+
 $${INCLUDE('docs-license.md')}
 
 $${INCLUDE('docs-other.md')}

@@ -1,8 +1,8 @@
 {
   "name": "zzz-template",
-  "version": "1.0.1",
+  "version": "2.0.0",
   "type": "module",
-  "description": "Fastest JavaScript template engine using native template literals. Zero dependencies, ~500 bytes, works in Node.js and browser. EJS/Handlebars alternative.",
+  "description": "Fastest JavaScript template engine using native template literals. Zero dependencies, ~600 bytes, works in Node.js and browser. EJS/Handlebars alternative.",
   "author": {
     "name": "Evgeny Sinitsyn",
     "email": "cuhuak@gmail.com"
