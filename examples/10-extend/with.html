@@ -1,25 +1,27 @@
+<!-- useWith: use ${name} instead of ${data.name} -->
 <script type="module">
-  import { ZzzTemplate, useFn } from '/zzz-template/index.js'
+  import { ZzzTemplate, useLayout } from '/zzz-template/index.js'
+
+  function useWith(zzz) {
+    zzz.s.unshift('with(data){')
+    zzz.e.push('return content}')
+  }
 
   const zzz = new ZzzTemplate()
-  zzz.s.unshift('with(data){')
-  zzz.e.push('}')
+  useLayout(zzz)
+  useWith(zzz) // MUST BE LAST
 
-  const result = zzz.render('template', { name: 'Tom', n: 42 })
+  const result = zzz.render('page', { title: 'My Page', name: 'Jerry' })
 
-  console.log(result)
   document.body.innerHTML = result
 </script>
 
-<script id="template" type="plain/text">
-  <p>
-    Hello ${name}!
-    <br>
-    Random number: ${n}
-  </p>
-  <pre>
-// data:
-${JSON.stringify(data, null, 2)}
-  </pre>
+<script id="page" type="plain/text">
+  ${LAYOUT('layout', {title})}
+  <p>Hello ${name}!</p>
 </script>
 
+<script id="layout" type="plain/text">
+  <h1>${title}</h1>
+  ${content}
+</script>

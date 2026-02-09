@@ -5,7 +5,7 @@ export class ZzzTemplateBase {
     this.$ = $this
   }
   compile(str, local, sign = 'data, parent') {
-    const fn = new Function(sign, `${this.s.join(';')}var content=\`${str}\`;${this.e.join(';')}return content;`)
+    const fn = new Function(sign, `${this.s.join(';')}var content=\`${str}\`;${this.e.join(';')}return content;`) // var to work "with"
     return fn.bind({...this.$, local}) // shallow copy of $
   }
   render(template, data, local = {}) {
