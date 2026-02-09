@@ -12,7 +12,8 @@
       .replaceAll("'", "&#039;")
   }
 
-  useFn(zzz, escapeHtml, 'ESCAPE')
+  useFn(zzz, escapeHtml, 'ESCAPE') // 👈 registers ESCAPE function
+
   const evilString = 'John<img src="" onerror=alert("Boo!")>'
 
   const result = zzz.render('template', { name: evilString })
