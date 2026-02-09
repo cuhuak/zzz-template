@@ -8,6 +8,7 @@ import zup from 'zup'
 import ejs from 'ejs'
 import dot from 'dot'
 import { Edge } from 'edge.js'
+import Handlebars from 'handlebars'
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = dirname(__filename)
@@ -34,6 +35,14 @@ async function run() {
   const compileDot = dot.template
   const edge = Edge.create()
   edge.mount('./')
+  Handlebars.registerHelper('truncate', str => str.length > 16 ? str.slice(0,16) + '...' : str)
+  const compileHandlebars = Handlebars.compile
+  // Handlebars caches compiled templates, use fresh instance for compile benchmark
+  const compileHandlebarsNoCache = tpl => {
+    const hbs = Handlebars.create()
+    hbs.registerHelper('truncate', str => str.length > 16 ? str.slice(0,16) + '...' : str)
+    return hbs.compile(tpl)
+  }
 
   const tplZzz = readTemplate('./template-zzz.html')
   const tplVanilla = tplZzz
@@ -42,6 +51,7 @@ async function run() {
   const tplEjs = readTemplate('template-ejs.html')
   const tplDot = readTemplate('template-dot.html')
   const tplEdge = readTemplate('template-edge.html')
+  const tplHandlebars = readTemplate('template-handlebars.html')
 
   const data = {
     heading: 'This title will be truncated',
@@ -66,6 +76,7 @@ async function run() {
   const compiledEjs = compileEjs(tplEjs, optionsEjs)
   const compiledDot = compileDot(tplDot, optionsDot)
   const compiledEdge = data => edge.renderRawSync(tplEdge, data)
+  const compiledHandlebars = compileHandlebars(tplHandlebars)
 
   console.log('--------- console.time Compile ---------')
   {
@@ -106,6 +117,12 @@ async function run() {
     console.time('edge compile')
     for (let i = 0; i < NUMBER_OF_TESTS; ++i) edge.compiler.compileRaw(tplEdge)
     console.timeEnd('edge compile')
+
+    await wait()
+
+    console.time('handlebars compile')
+    for (let i = 0; i < NUMBER_OF_TESTS; ++i) compileHandlebarsNoCache(tplHandlebars)
+    console.timeEnd('handlebars compile')
 
     await wait()
   }
@@ -153,6 +170,12 @@ async function run() {
     console.timeEnd('edge render')
 
     await wait()
+
+    console.time('handlebars render')
+    for (let i = 0; i < NUMBER_OF_TESTS; ++i) compiledHandlebars(data)
+    console.timeEnd('handlebars render')
+
+    await wait()
   }
 
   console.log('--------- Benchmark Compile ---------')
@@ -180,6 +203,9 @@ async function run() {
       })
       .add('Edge compile', function () {
         edge.compiler.compileRaw(tplEdge)
+      })
+      .add('Handlebars compile', function () {
+        compileHandlebarsNoCache(tplHandlebars)
       })
       .on('cycle', function (event) {
         console.log(String(event.target))
@@ -220,6 +246,9 @@ async function run() {
       })
       .add('edge render', function () {
         compiledEdge(data)
+      })
+      .add('handlebars render', function () {
+        compiledHandlebars(data)
       })
       .on('cycle', function (event) {
         console.log(String(event.target))
