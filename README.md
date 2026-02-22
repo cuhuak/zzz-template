@@ -545,6 +545,11 @@ And if you do, please make sure you:
 
 ## Changelog
 
+### 2.1.0
+
+- **Breaking**: Removed deprecated `ZzzBrowser` export (use `ZzzTemplate`)
+- **Breaking**: Removed deprecated `ZzzFs` export (use `ZzzTemplateNode`)
+
 ### 2.0.0
 
 - **Breaking**: `useFn` simplified - now accepts `(zzz, fn, name)` and registers function by ALIAS (not fn.name)
@@ -565,4 +570,4 @@ Looking for JavaScript template engines? Here are some alternatives:
 - [doT](https://www.npmjs.com/package/dot) - Fast template engine
 
 ---
-Docs revision: 2026-02-22T11:21:28.404Z
+Docs revision: 2026-02-22T11:39:35.190Z

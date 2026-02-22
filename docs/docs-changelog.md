@@ -1,5 +1,10 @@
 ## Changelog
 
+### 2.1.0
+
+- **Breaking**: Removed deprecated `ZzzBrowser` export (use `ZzzTemplate`)
+- **Breaking**: Removed deprecated `ZzzFs` export (use `ZzzTemplateNode`)
+
 ### 2.0.0
 
 - **Breaking**: `useFn` simplified - now accepts `(zzz, fn, name)` and registers function by ALIAS (not fn.name)
