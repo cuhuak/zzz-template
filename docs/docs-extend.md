@@ -40,3 +40,6 @@ console.log(result); // > "Hello Tom"
 $${EXAMPLE('Example that introduces `ESCAPE` function that escapes string', 'examples/10-extend/escape.html')}
 
 $${EXAMPLE('Example using `with` statement to avoid `data.` prefix', 'examples/10-extend/with.html')}
+
+> 📝 Fun fact: this documentation is generated using zzz-template itself! Check  
+out the [docs](docs) folder to see how.  

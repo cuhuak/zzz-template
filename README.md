@@ -6,19 +6,20 @@
 [![npm bundle size](https://img.shields.io/bundlephobia/minzip/zzz-template)](https://bundlephobia.com/package/zzz-template)
 [![license](https://img.shields.io/npm/l/zzz-template.svg)](https://github.com/cuhuak/zzz-template/blob/main/LICENSE)
 
-**zzz-template** is an ultra-lightweight JavaScript template engine that leverages native template literals for maximum performance. 
+**zzz-template** is an ultra-lightweight JavaScript template engine that leverages native template literals for maximum performance.
 A fast, hackable alternative to EJS, Handlebars, and Mustache that works in both Node.js and browsers.
 
 ## Features
 
-- **Echo variables**: `${data.user.name}`
-- **Layouts**: Set layout in child template `${LAYOUT("layout.html")}`, echo content `${data.content}` in `layout.html`
-- **Include (partial) templates**: `${INCLUDE('partial.html', data)}`
-- **Local variables**: `${SET('title', 'Hello world')}`, then use it in template: `${local.title}`
+- **Echo var**: `${data.user.name}`
+- **Include template**: `${INCLUDE('template.html', data)}`
+- **Local vars**: `${SET('title', 'Hello world')}`, then use it in any template (layouts, partials): `${local.title}`
+- **Conditionals**: `${IF(data.isAdmin, '<b>Admin</b>', data)}` or `${IFI(data.isAdmin, 'template.html', data)}`
+- **Iteration**: `${MAP(data.items, '<li>${data.name}</li>')}` or `${MAPI(data.items, 'item.html')}`
+- **Layouts**: `${LAYOUT("layout.html")}` sets layout, `${data.content}` echoes content in `layout.html`
 - **Blazing fast**: Matches vanilla JavaScript performance (24M ops/sec)
-- **Zero dependencies**: No bloat, no supply chain risk
-- **Tiny footprint**: ~50 lines of code, ~600 bytes minified + gzipped
-- **Hackable**: Easy to extend with plugins
+- **Tiny & zero dependencies**: ~50 lines of code, ~600 bytes min+gzip
+- **Hackable**: Easy to extend with plugins (see [`with` example](examples/10-extend) to use `${name}` instead of `${data.name}`)
 - **Isomorphic**: Works on server (Node.js) and browser
 
 ## Installation
@@ -27,16 +28,7 @@ A fast, hackable alternative to EJS, Handlebars, and Mustache that works in both
 npm install zzz-template
 ```
 
-### Compile example (see [examples/00-compile](examples/00-compile))
-``` javascript
-// file examples/00-compile/example.js
-import {ZzzTemplate} from "zzz-template"
-
-const zzz = new ZzzTemplate()
-const fn = zzz.compile('Hello ${data.name}') // returns function that renders your template using data: `fn(data)`
-console.log(fn({name: 'Jerry'})); // > "Hello Jerry"
-console.log(fn({name: 'Tom'})); // > "Hello Tom"
-```
+> ⭐ If you find this lib useful, please do not hesitate to star it on [GitHub](https://github.com/cuhuak/zzz-template) :)
 
 ### Basic example (browser), render `<script>` template (see [examples/01-basic](examples/01-basic))
 ``` html
@@ -67,6 +59,7 @@ console.log(fn({name: 'Tom'})); // > "Hello Tom"
   Hello ${data.name}
 </p>
 ```
+
 ``` javascript
 // file examples/02-basic/example.js
 import { ZzzTemplateNode } from 'zzz-template/node.js'
@@ -452,7 +445,8 @@ console.log(result); // > "Hello Tom"
       .replaceAll("'", "&#039;")
   }
 
-  useFn(zzz, escapeHtml, 'ESCAPE')
+  useFn(zzz, escapeHtml, 'ESCAPE') // 👈 registers ESCAPE function
+
   const evilString = 'John<img src="" onerror=alert("Boo!")>'
 
   const result = zzz.render('template', { name: evilString })
@@ -500,6 +494,9 @@ console.log(result); // > "Hello Tom"
   ${content}
 </script>
 ```
+
+> 📝 Fun fact: this documentation is generated using zzz-template itself! Check  
+out the [docs](docs) folder to see how.
 
 ## Fast
 
@@ -568,4 +565,4 @@ Looking for JavaScript template engines? Here are some alternatives:
 - [doT](https://www.npmjs.com/package/dot) - Fast template engine
 
 ---
-Docs revision: 2026-02-09T09:14:32.390Z
+Docs revision: 2026-02-22T11:21:28.404Z

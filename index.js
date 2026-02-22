@@ -47,6 +47,3 @@ zzz.$['INCLUDE'] || useInclude(zzz)
   useFn(zzz, function (arr, str) {return arr.map(x => {return zzz.compile(str, this.local)(x)}).join('')}, 'MAP')
   useFn(zzz, function (arr, file) {return arr.map(x => {return this.INCLUDE(file, x)}).join('')}, 'MAPI')
 }
-
-// @deprecated ZzzBrowser, use ZzzTemplate class instead
-export const ZzzBrowser = ZzzTemplate

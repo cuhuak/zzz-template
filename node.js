@@ -13,6 +13,3 @@ export class ZzzTemplateNode extends ZzzTemplateBase {
     return readFileSync(join(this._dir, f), "utf8")
   }
 }
-
-// @deprecated
-export const ZzzFs = ZzzTemplateNode
