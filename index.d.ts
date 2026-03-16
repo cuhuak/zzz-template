@@ -3,6 +3,7 @@ export class ZzzTemplateBase {
   e: string[];
   $: Record<string, any>;
   constructor($this?: Record<string, any>);
+  fn(str: string, sign?: string): Function;
   compile(str: string, local?: Record<string, any>, sign?: string): (data: any, parent?: any) => string;
   render(template: string, data: any, local?: Record<string, any>): string;
   read(f: string): string;

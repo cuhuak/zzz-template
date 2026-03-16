@@ -2,11 +2,13 @@ export class ZzzTemplateBase {
   s = [] // s - start, before content
   e = [] // e - end, after content
   constructor($this = {}) {
-    this.$ = $this
+    this.$ = $this // context of template
+  }
+  fn(str, sign) {
+    return new Function(sign, `${this.s.join(';')}var content=\`${str}\`;${this.e.join(';')}return content;`) // var to work "with"
   }
   compile(str, local, sign = 'data, parent') {
-    const fn = new Function(sign, `${this.s.join(';')}var content=\`${str}\`;${this.e.join(';')}return content;`) // var to work "with"
-    return fn.bind({...this.$, local}) // shallow copy of $
+    return this.fn(str, sign).bind({...this.$, local}) // shallow copy of $
   }
   render(template, data, local = {}) {
     return this.compile(this.read(template), {...local})(data) // shallow copy of local
